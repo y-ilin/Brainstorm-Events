@@ -1,9 +1,9 @@
 const express = require("express");
+const session = require("express-session");
+const mongoose = require("mongoose");
 const app = express();
 
-// const PORT = process.env.PORT || 3000;
-const db = require("./models");
-
+const passport = require("./passport");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
@@ -11,11 +11,17 @@ const io = require("socket.io")(server);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 8080);
+// We need to use sessions to keep track of our user's login status
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 // app.use(app.router);
 
-// // Requiring our routes
-// require("./controllers/html-routes.js");
+// Requiring our routes
+require("./controllers/html-routes.js")(app);
 // require("./controllers/api-routes.js");
 
 server.listen(app.get("port"), () => {
