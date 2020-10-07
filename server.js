@@ -57,12 +57,12 @@ io.sockets.on("connection", socket => {
     const beginNextPhase = (currentPhaseDuration) => {
       console.log(`Beginning phase ${currentPhase} for ${currentPhaseDuration} seconds!`);
       // Tell clients to begin phase countdown
-      socket.emit("begin-phase", {currentPhase: currentPhase, duration: currentPhaseDuration})
+      io.sockets.emit("begin-phase", {currentPhase: currentPhase, duration: currentPhaseDuration})
       // Begin phase countdown on server side
       serverTimer(currentPhaseDuration);
     }
 
-    socket.on("begin-next-phase", data => {
+    socket.on("begin-next-phase", () => {
       let phaseDuration = 0;
       if (currentPhase===1) {
         phaseDuration = phase1duration;
@@ -89,73 +89,7 @@ io.sockets.on("connection", socket => {
       // Store countdown duration data given by user
       phase1duration = data.phase1duration;
       phase2duration = data.phase2duration;
-      phase3duration = data.phase3duration;
-
-
-      // // For each of the 3 phases, run countdown
-      // for (let currentPhase=1; currentPhase<4; currentPhase++) {
-      //   console.log("current phase is: ", currentPhase);
-
-      //   let currentPhaseDuration = 0;
-      //   if (currentPhase===1) {
-      //     currentPhaseDuration = data.phase1duration;
-      //   } else if (currentPhase===2) {
-      //     currentPhaseDuration = data.phase2duration;
-      //   } else if (currentPhase===3) {
-      //     currentPhaseDuration = data.phase3duration;
-      //   }
-      //   console.log(`Phase ${currentPhase} duration is ${currentPhaseDuration}`)
-
-      //   // // Tell clients to begin phase
-      //   // socket.emit("begin-phase", {duration: currentPhaseDuration, currentPhase: currentPhase})
-
-      //   // Allow client side 5 seconds to play the phase intro to brief users
-      //   let introDuration = 5;
-      //   console.log("start intro for 5 sec");
-      //   setTimeout(() => {
-      //     console.log(`server: intro over--phase ${currentPhase} begin!`);
-      //     // Tell clients to begin phase countdown
-      //     socket.emit("begin-phase", {duration: currentPhaseDuration*1000, currentPhase: currentPhase})
-
-      //     // Begin countdown on server side
-      //     serverTimer(currentPhaseDuration*1000);
-      //   }, introDuration);
-      //   // const serverIntroTimer = setInterval(() => {
-      //   //   introDuration--;
-      //   //   console.log(introDuration)
-
-      //   //   if (introDuration <= 0){
-      //   //     console.log(`server: intro over--phase ${currentPhase} begin!`);
-      //   //     // Tell clients to begin phase countdown
-      //   //     socket.emit("begin-phase", {duration: currentPhaseDuration*1000, currentPhase: currentPhase});
-      //   //     serverTimer(currentPhaseDuration);
-      //   //     clearInterval(serverIntroTimer)
-      //   //   }
-      //   // }, 1000)
-
-      //   const serverTimer = () => {
-      //     setTimeout(() => {
-      //       console.log(`server: timer ${currentPhase} finished!`);
-      //       // Now continue to next phase, begin for loop again
-      //     }, currentPhaseDuration*1000);
-      //   }
-      //   // const serverTimer = setInterval(timeLeft => {
-      //   //   timeLeft--;
-      //   //   console.log(timeLeft);
-
-      //   //   if (timeLeft <= 0) {
-      //   //     console.log(`server: timer ${currentPhase} finished!`);
-      //   //     clearInterval(serverTimer);
-      //   //   }
-      //   // }, 1000)
-
-      //   // setTimeout(() => {
-      //   //   console.log(`server: phase ${currentPhase} begin!`);
-      //   //   // On server side, set the countdown stop watch
-      //   //   // on client side, set the setInterval to display the ticking down of seconds
-      //   //   socket.emit("begin-next-phase", {duration: data.phase1duration, currentPhase: currentPhase})
-      //   //   serverTimer();
-      //   // }, 1000);
-      
+      phase3duration = data.phase3duration;      
     })
+
 })

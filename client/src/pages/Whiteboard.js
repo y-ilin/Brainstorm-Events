@@ -41,29 +41,8 @@ function Whiteboard() {
           clearInterval(countdown);
         }
       }, 1000)
-
-      // // If we're in one of the 3 phases, load the phase page and features,
-      // // and start the relevant coutndown
-      // if (currentPhase===1 || currentPhase===2 || currentPhase===3) {
-      //   let timeLeft = data.duration;
-
-      //   // Start countdown
-      //   const countdown = setInterval(() => {
-      //     timeLeft--;
-      //     console.log(timeLeft); // This time to later be displayed on DOM
-  
-      //     // If time runs out, clear the countdown interval
-      //     if (timeLeft <= 0) {
-      //       console.log("client: phase complete")
-      //       clearInterval(countdown);
-      //     }
-      //   }, 1000)
-      // } else {
-      //   // If we have finished the 3 phases, load finishing page
-      //   console.log("now to load finishing page!")
-      // }
-
     })
+
   }, []);
   
   // Set up state to track what user inputs for each phase duration
@@ -93,29 +72,6 @@ function Whiteboard() {
     console.log("Begin next phase")
     socket.emit("begin-next-phase");
   }
-
-  // Tell server to start countdown with the 3 durations provided by user
-
-  // // Countdown
-  // const startCountdown = (phasedurations) => {
-  //     // Tell server to startCountdown with given phase durations
-  //     socket.emit("startCountdown", phasedurations);
-  // }
-
-
-  // // On form submit, start countdown
-  // $("#countdownForm").on("submit", (e) => {
-  //     e.preventDefault();
-  //     console.log("form submitted");
-  //     // Get user's input for phase durations
-  //     const phasedurations = {
-  //         phase1duration: $("#phase1duration").val(),
-  //         phase2duration: $("#phase2duration").val(),
-  //         phase3duration: $("#phase3duration").val(),
-  //     }
-  //     // Feed phase duration data to startCountdown function
-  //     startCountdown(phasedurations);
-  // });
 
   const renderPhase = () => {
     if (currentPhase === 1) {
