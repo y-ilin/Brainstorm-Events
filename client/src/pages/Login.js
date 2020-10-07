@@ -39,13 +39,11 @@ function Login() {
 
   // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
   function loginUser(email, password) {
-    console.log("logging in")
     API.login({
       email: email,
       password: password
     })
       .then(() => {
-        console.log("logged in")
         // res.redirect("/index.html");
         window.location.replace("/");
       })
