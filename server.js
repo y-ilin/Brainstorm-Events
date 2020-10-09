@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/userdb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/brainstormEvents", { useNewUrlParser: true });
 
 const passport = require("./scripts/passport");
 const server = require("http").createServer(app);
@@ -30,6 +30,7 @@ app.use(passport.session());
 // Requiring our routes
 // require("./controllers/html-routes.js")(app); // Routing will now be served on the front end by React!
 require("./controllers/api-routes.js")(app);
+require("./controllers/sticky-api-routes.js")(app);
 
 server.listen(app.get("port"), () => {
     console.log(
@@ -56,7 +57,7 @@ io.sockets.on("connection", socket => {
 
     const beginNextPhase = (currentPhaseDuration) => {
       console.log(`Beginning phase ${currentPhase} for ${currentPhaseDuration} seconds!`);
-      // Tell clients to begin phase countdown
+      // Tell all clients to begin phase countdown
       io.sockets.emit("begin-phase", {currentPhase: currentPhase, duration: currentPhaseDuration})
       // Begin phase countdown on server side
       serverTimer(currentPhaseDuration);
