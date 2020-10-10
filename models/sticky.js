@@ -3,15 +3,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const stickySchema = new Schema({
-  noteText: {
+  stickyText: {
     type: String,
     trim: true,
   },
-  xCoord: {
+  x: {
     type: Number,
+    default: 50,
   },
-  yCoord: {
+  y: {
     type: Number,
+    default: 50,
   },
   noteColor: {
     type: String,
