@@ -20,9 +20,6 @@ export function NewStickyForm(props) {
   useEffect(() => {
     // When receiving a broadcast about another user creating a new sticky
     socket.on("incoming-new-sticky", data => {
-      console.log("incoming new sticky with data: ", data)
-      console.log(props.allStickies)
-
       // Broadcast.emit not working, do this to exclude sender from adding their new sticky to their DOM
       if (data.client === userData.id) {
         return
