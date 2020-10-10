@@ -93,8 +93,15 @@ io.sockets.on("connection", socket => {
       phase3duration = data.phase3duration;      
     })
 
+    // When one user creates new sticky, broadcast to all other users
     socket.on("send-new-sticky", data => {
       socket.broadcast.emit("incoming-new-sticky", data)
+    })
+
+    // When one user moves a sticky, broadcast to all other users
+    socket.on("sticky-move", data => {
+      // console.log("sticky move data: ", data)
+      socket.broadcast.emit("incoming-sticky-move", data)
     })
 
 })
