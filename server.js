@@ -93,4 +93,8 @@ io.sockets.on("connection", socket => {
       phase3duration = data.phase3duration;      
     })
 
+    socket.on("send-new-sticky", data => {
+      socket.broadcast.emit("incoming-new-sticky", data)
+    })
+
 })
