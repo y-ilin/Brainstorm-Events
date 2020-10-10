@@ -25,9 +25,16 @@ module.exports = function(app) {
 
   // Move a sticky
   app.post("/api/movesticky", (req, res) => {
-    console.log(req.body.x)
     Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {x: req.body.x, y: req.body.y}}, () => {
-      Sticky.findOne({stickyId: req.body.stickyId}, (err, docs) => console.log(docs))
+      Sticky.findOne({stickyId: req.body.stickyId})
+    })
+    .catch(err => console.log(err))
+  })
+
+  // Change a sticky's text
+  app.post("/api/changestickytext", (req, res) => {
+    Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {stickyText: req.body.stickyTextContent}}, () => {
+      Sticky.findOne({stickyId: req.body.stickyId})
     })
     .catch(err => console.log(err))
   })

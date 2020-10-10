@@ -15,5 +15,8 @@ export default {
     },
     moveSticky: query => {
         return axios.post("/api/movesticky", query)
+    },
+    changeStickyText: query => {
+        return axios.post("/api/changestickytext", query)
     }
 }; 

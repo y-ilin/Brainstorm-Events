@@ -100,8 +100,11 @@ io.sockets.on("connection", socket => {
 
     // When one user moves a sticky, broadcast to all other users
     socket.on("sticky-move", data => {
-      // console.log("sticky move data: ", data)
       socket.broadcast.emit("incoming-sticky-move", data)
     })
 
+    // When one user changes the text of a sticky, broadcast to all other users
+    socket.on("sticky-text-change", data => {
+      socket.broadcast.emit("incoming-sticky-text-change", data)
+    })
 })
