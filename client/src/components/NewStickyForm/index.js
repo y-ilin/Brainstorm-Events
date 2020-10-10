@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useMemo } from "react";
+import React, { useState, useContext, useEffect } from "react";
 // import io from "socket.io-client";
 import API from "../../utils/API";
 import "./style.css";
@@ -8,11 +8,6 @@ import SocketContext from "../../utils/SocketContext";
 export function NewStickyForm(props) {
   const userData = useContext(UserContext);
   const socket = useContext(SocketContext);
-
-  // Connect to socket.io
-  // const socket = useMemo(() => {
-  //   return io.connect()
-  // }, []);
   
   // Set up state to track what text is on the new sticky to be submitted
   const [newStickyText, setNewStickyText] = useState("");
