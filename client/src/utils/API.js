@@ -15,5 +15,9 @@ export default {
     createSticky: query => {
         console.log("API call to create new sticky")
         return axios.post("/api/sticky", query);
+    },
+    moveSticky: query => {
+        console.log("API call to move a sticky")
+        return axios.post("/api/movesticky", query)
     }
 }; 

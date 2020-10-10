@@ -3,6 +3,7 @@ import "./style.css";
 // import io from "socket.io-client";
 import Draggable from "react-draggable";
 import SocketContext from "../../utils/SocketContext";
+import API from "../../utils/API";
 
 export function Sticky(props) {
   const socket = useContext(SocketContext);
@@ -21,12 +22,6 @@ export function Sticky(props) {
     })
   }, [])
 
-  // useEffect(() => {
-  //   // console.log(stickyPosition)
-  //   // On drag, send new position to server to broadcast to all other users
-  //   socket.emit("sticky-move", {stickyId: props.stickyId, x: stickyPosition.x, y: stickyPosition.y})
-  // }, [stickyPosition])
-
   const handleDrag = (e, data) => {
     // console.log("event: ", e);
     console.log("data: ", data);
@@ -35,13 +30,26 @@ export function Sticky(props) {
     // // On drag, send new position to server to broadcast to all other users
     socket.emit("sticky-move", {stickyId: props.stickyId, x: data.x, y: data.y})
 
-    // On drop, send new position to database
+  }
+
+  // On drop after dragging a sticky, send new position to database
+  const handleStopDrag = (e, data) => {
+    console.log("stickyid: ", props.stickyId)
+    console.log("data of stop drag: ", data)
+    API.moveSticky({stickyId: props.stickyId, x: data.x, y: data.y})
+      .then(data => {
+        console.log("sticky moved! ", data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   return (
       <Draggable
         bounds="parent"
         onDrag={handleDrag}
+        onStop={handleStopDrag}
         // defaultPosition={{x: stickyPosition.x, y: stickyPosition.y}}
         // defaultPosition={stickyPosition}
         position={stickyPosition}
