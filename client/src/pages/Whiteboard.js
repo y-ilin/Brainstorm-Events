@@ -15,11 +15,6 @@ function Whiteboard() {
   // State to manage which phase the event is in, or if the event is completed
   const [currentPhase, setCurrentPhase] = useState(1);
 
-  // Connect to socket.io
-  // const socket = useMemo(() => {
-  //   return io.connect()
-  // }, []);
-
   // On page load
   useEffect(() => {
     socket.on("welcome-waiting-room", data => {
