@@ -13,6 +13,7 @@ module.exports = function(app) {
   // Create a sticky
   app.post("/api/sticky", (req, res) => {
     Sticky.create({
+      stickyId: req.body.stickyId,
       stickyText: req.body.stickyText,
       x: 50,
       y: 50,
@@ -25,8 +26,8 @@ module.exports = function(app) {
   // Move a sticky
   app.post("/api/movesticky", (req, res) => {
     console.log(req.body.x)
-    Sticky.updateOne({_id: req.body.stickyId}, {$set: {x: req.body.x, y: req.body.y}}, () => {
-      Sticky.findOne({_id: req.body.stickyId}, (err, docs) => console.log(docs))
+    Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {x: req.body.x, y: req.body.y}}, () => {
+      Sticky.findOne({stickyId: req.body.stickyId}, (err, docs) => console.log(docs))
     })
     .catch(err => console.log(err))
   })

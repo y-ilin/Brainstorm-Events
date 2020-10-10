@@ -26,8 +26,8 @@ export function StickyContainer() {
 
       {allStickies.map(sticky => {
         return <Sticky
-          key={sticky._id}
-          stickyId={sticky._id}
+          key={sticky.stickyId}
+          stickyId={sticky.stickyId}
           stickyText={sticky.stickyText}
           x={sticky.x}
           y={sticky.y}

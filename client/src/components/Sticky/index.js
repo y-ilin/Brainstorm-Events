@@ -34,8 +34,6 @@ export function Sticky(props) {
 
   // On drop after dragging a sticky, send new position to database
   const handleStopDrag = (e, data) => {
-    console.log("stickyid: ", props.stickyId)
-    console.log("data of stop drag: ", data)
     API.moveSticky({stickyId: props.stickyId, x: data.x, y: data.y})
       .then(data => {
         console.log("sticky moved! ", data)

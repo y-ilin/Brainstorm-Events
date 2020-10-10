@@ -4,6 +4,7 @@ import API from "../../utils/API";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
 import SocketContext from "../../utils/SocketContext";
+import { v4 as uuidv4 } from 'uuid';
 
 export function NewStickyForm(props) {
   const userData = useContext(UserContext);
@@ -29,6 +30,7 @@ export function NewStickyForm(props) {
 
       // Create the sticky on this user's DOM as well
       props.setAllStickies([...props.allStickies, {
+        stickyId: data.stickyId,
         stickyText: data.stickyText,
         x: data.x,
         y: data.y,
@@ -48,18 +50,22 @@ export function NewStickyForm(props) {
       return
     }
 
+    // Create a unique id for this sticky
+    const stickyId = uuidv4();
+
     // Create sticky on user's DOM
     props.setAllStickies([...props.allStickies, {
+      stickyId: stickyId,
       stickyText: newStickyText,
       x: 50,
       y: 50,
     }])
 
     // Send to server to broadcast to create sticky on everyone else's DOM
-    socket.emit("send-new-sticky", {client: userData.id, stickyText: newStickyText, x: 50, y: 50})
+    socket.emit("send-new-sticky", {stickyId: stickyId, client: userData.id, stickyText: newStickyText, x: 50, y: 50})
 
     // Create sticky in database
-    API.createSticky({stickyText: newStickyText})
+    API.createSticky({stickyId: stickyId, stickyText: newStickyText})
       .then(data => {
         console.log("sticky created! ", data)
       })
