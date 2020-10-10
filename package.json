@@ -28,6 +28,7 @@
     "mongoose": "^5.10.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "react-draggable": "^4.4.3",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
