@@ -1,22 +1,24 @@
 import React, { useContext, useState, useEffect, useMemo } from "react";
 // import "./style.css";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import UserContext from "../utils/UserContext";
 import Phase1 from "../components/Phase1";
 import Phase2 from "../components/Phase2";
 import Phase3 from "../components/Phase3";
 import StickyContainer from "../components/StickyContainer";
+import SocketContext from "../utils/SocketContext";
 
 function Whiteboard() {
   const userData = useContext(UserContext);
+  const socket = useContext(SocketContext);
 
   // State to manage which phase the event is in, or if the event is completed
   const [currentPhase, setCurrentPhase] = useState(1);
 
   // Connect to socket.io
-  const socket = useMemo(() => {
-    return io.connect()
-  }, []);
+  // const socket = useMemo(() => {
+  //   return io.connect()
+  // }, []);
 
   // On page load
   useEffect(() => {

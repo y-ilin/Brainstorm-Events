@@ -1,20 +1,18 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import API from "../../utils/API";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
+import SocketContext from "../../utils/SocketContext";
 
 export function NewStickyForm(props) {
   const userData = useContext(UserContext);
+  const socket = useContext(SocketContext);
 
   // Connect to socket.io
-  const socket = useMemo(() => {
-    return io.connect()
-  }, []);
-
-  useEffect(() => {
-    console.log("props: ", props)
-  }, [props])
+  // const socket = useMemo(() => {
+  //   return io.connect()
+  // }, []);
   
   // Set up state to track what text is on the new sticky to be submitted
   const [newStickyText, setNewStickyText] = useState("");
@@ -24,8 +22,6 @@ export function NewStickyForm(props) {
   }
 
   useEffect(() => {
-    // console.log("socket is: ", socket)
-    // console.log("props ARE: ", props)
     // When receiving a broadcast about another user creating a new sticky
     socket.on("incoming-new-sticky", data => {
       console.log("incoming new sticky with data: ", data)
