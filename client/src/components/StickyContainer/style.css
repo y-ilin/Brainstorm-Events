@@ -1,0 +1,5 @@
+.stickyContainer {
+  background-color: rgb(255, 200, 200);
+  height: 80vh;
+  position: relative;
+}

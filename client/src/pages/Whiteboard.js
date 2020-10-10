@@ -5,6 +5,7 @@ import UserContext from "../utils/UserContext";
 import Phase1 from "../components/Phase1";
 import Phase2 from "../components/Phase2";
 import Phase3 from "../components/Phase3";
+import StickyContainer from "../components/StickyContainer";
 
 function Whiteboard() {
   const userData = useContext(UserContext);
@@ -118,6 +119,8 @@ function Whiteboard() {
         ></input>
 
         { renderPhase() }
+
+        <StickyContainer />
 
         <button onClick={handleNextPhase}>Start Next Phase</button>
     </form>
