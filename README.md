@@ -5,6 +5,8 @@ When is the last time you encouraged **divergent thinking** in your team brainst
 
 Think sticky notes on a whiteboard, but in **3 timed phases** ⏱️
 
+Stay completely **anonymous** 👀 when sticking your ideas on the board, phew! Pressure off there 🌬️
+
 Using **MERN stack** and **socket.io** so you can see your team put stickies on the board in real time 💥
 
 ```Mongo.db``` ```Express.js``` ```React``` ```Node.js```
