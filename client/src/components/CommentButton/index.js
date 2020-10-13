@@ -55,7 +55,7 @@ export function CommentButton(props) {
 
     // Create comment in database, link it to the current sticky
     API.createComment({commentId: commentId, stickyId: props.stickyId})
-      .then(data => console.log("empty comment created!", data))
+      // .then(data => console.log("empty comment created!", data))
       .catch(err => console.log(err))
   }
 

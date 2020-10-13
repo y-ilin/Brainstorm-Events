@@ -1,5 +1,6 @@
 .draggableGroup {
   width: fit-content;
+  position: absolute;
 }
 
 .sticky {
