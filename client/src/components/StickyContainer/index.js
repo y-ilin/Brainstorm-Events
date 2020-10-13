@@ -12,6 +12,7 @@ export function StickyContainer() {
   useEffect(() => {
     API.loadStickies()
       .then(res => {
+        console.log(res.data)
         setAllStickies(res.data);
       })
   }, [])
@@ -31,6 +32,7 @@ export function StickyContainer() {
           stickyText={sticky.stickyText}
           x={sticky.x}
           y={sticky.y}
+          comments={sticky.comments}
         />
       })}
     </div>
