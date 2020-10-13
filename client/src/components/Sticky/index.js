@@ -4,6 +4,8 @@ import ContentEditable from "react-contenteditable";
 import Draggable from "react-draggable";
 import SocketContext from "../../utils/SocketContext";
 import API from "../../utils/API";
+import CommentButton from "../CommentButton";
+import Comment from "../Comment";
 
 export function Sticky(props) {
   const socket = useContext(SocketContext);
@@ -12,6 +14,8 @@ export function Sticky(props) {
   const [stickyPosition, setStickyPosition] = useState({x: props.x, y: props.y});
   // State to track sticky text content
   const [stickyTextContent, setStickyTextContent] = useState(props.stickyText);
+  // State to track all the comments for this sticky
+  const [allComments, setAllComments] = useState(props.comments);
 
   useEffect(() => {
     // When another user moves a sticky, listen here to move it on current user's DOM
@@ -44,12 +48,8 @@ export function Sticky(props) {
   // On drop after dragging a sticky, send new position to database
   const handleStopDrag = (e, data) => {
     API.moveSticky({stickyId: props.stickyId, x: data.x, y: data.y})
-      .then(data => {
-        console.log("sticky moved! ", data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      .then(data => console.log("sticky moved! ", data))
+      .catch(err => console.log(err))
   }
 
   // After finishing changing a sticky's text
@@ -61,18 +61,13 @@ export function Sticky(props) {
 
     setStickyTextContent(e.target.innerHTML);
 
-    // // Send new text to server to broadcast to all other users
+    // Send new text to server to broadcast to all other users
     socket.emit("sticky-text-change", {stickyId: props.stickyId, stickyTextContent: e.target.innerHTML});
 
-    // // Save new text in database
+    // Save new text in database
     API.changeStickyText({stickyId: props.stickyId, stickyTextContent: e.target.innerHTML})
-      .then(data => {
-        console.log("sticky's new text saved in database! ", data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
+      .then(data => console.log("sticky's new text saved in database! ", data))
+      .catch(err => console.log(err))
   }
 
   return (
@@ -85,13 +80,29 @@ export function Sticky(props) {
         position={stickyPosition}
         // positionOffset={stickyPosition}
       >
-        <ContentEditable
-          html={stickyTextContent}
-          disabled={false}
-          className="sticky"
-          // onChange={handleStickyTextChange}
-          onBlur={handleFinishTextChange}
-        />
+        <div className="draggableGroup">
+          <ContentEditable
+            html={stickyTextContent}
+            disabled={false}
+            className="sticky"
+            onBlur={handleFinishTextChange}
+          />
+          <CommentButton
+            stickyId={props.stickyId}
+            allComments={allComments}
+            setAllComments={setAllComments}
+          />
+          {allComments
+          ? allComments.map(comment => {
+            return <Comment
+              key={comment.commentId}
+              // stickyId={comment.stickyId}
+              commentText={comment.commentText}
+            />
+          })
+          : null
+          }
+        </div>
       </Draggable>
   );
 }
