@@ -18,5 +18,11 @@ export default {
     },
     changeStickyText: query => {
         return axios.post("/api/changestickytext", query)
+    },
+    createComment: query => {
+        return axios.post("/api/comment", query)
+    },
+    changeCommentText: query => {
+        return axios.post("/api/changecommenttext", query)
     }
 }; 

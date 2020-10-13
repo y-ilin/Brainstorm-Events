@@ -1,13 +1,13 @@
 // Requiring our models and passport as we've configured it
 // const db = require("../models");
 const Sticky = require("../models/sticky");
+const Comment = require("../models/comment");
 
 module.exports = function(app) {
   // Get all stickies
   app.get("/api/sticky", (req, res) => {
-   Sticky.find().then(data => {
-      res.json(data);
-    });
+   Sticky.find().populate("comments")
+    .then(data => res.json(data));
   });
 
   // Create a sticky
@@ -18,9 +18,7 @@ module.exports = function(app) {
       x: 50,
       y: 50,
     })
-      .then(data => {
-        res.json(data);
-      })
+      .then(data => res.json(data));
   });
 
   // Move a sticky
@@ -38,4 +36,26 @@ module.exports = function(app) {
     })
     .catch(err => console.log(err))
   })
+
+  // Create a comment on a sticky
+  app.post("/api/comment", (req, res) => {
+    Comment.create({
+      commentId: req.body.commentId,
+      stickyId: req.body.stickyId,
+    })
+      .then(({_id, stickyId}) => Sticky.findOneAndUpdate({stickyId: stickyId}, { $push: { comments: _id } }, { new: true }))
+      .then(Comment => {
+        console.log(Comment)
+        res.json(Comment)
+      });
+  });
+
+  // Change a comment's text
+  app.post("/api/changecommenttext", (req, res) => {
+    Comment.find({commentId: req.body.commentId}, {$set: {commentText: req.body.commentTextContent}}, () => {
+      Comment.findOne({commentId: req.body.commentId})
+    })
+    .catch(err => console.log(err))
+  })
+
 };

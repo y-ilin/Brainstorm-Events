@@ -96,7 +96,7 @@ export function Sticky(props) {
           ? allComments.map(comment => {
             return <Comment
               key={comment.commentId}
-              // stickyId={comment.stickyId}
+              stickyId={comment.stickyId}
               commentText={comment.commentText}
             />
           })
