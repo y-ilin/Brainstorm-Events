@@ -4,6 +4,7 @@ const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/brainstormEvents", { useNewUrlParser: true });
+mongoose.set('useFindAndModify', false);
 
 const passport = require("./scripts/passport");
 const server = require("http").createServer(app);
@@ -106,5 +107,15 @@ io.sockets.on("connection", socket => {
     // When one user changes the text of a sticky, broadcast to all other users
     socket.on("sticky-text-change", data => {
       socket.broadcast.emit("incoming-sticky-text-change", data)
+    })
+
+    // When one user creates a comment on a sticky, broadcast to all other users
+    socket.on("send-new-comment", data => {
+      socket.broadcast.emit("incoming-new-comment", data)
+    })
+
+    // When one user changes the text of a comment, broadcast to all other users
+    socket.on("comment-text-change", data => {
+      socket.broadcast.emit("incoming-comment-text-change", data)
     })
 })

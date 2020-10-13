@@ -52,7 +52,7 @@ module.exports = function(app) {
 
   // Change a comment's text
   app.post("/api/changecommenttext", (req, res) => {
-    Comment.find({commentId: req.body.commentId}, {$set: {commentText: req.body.commentTextContent}}, () => {
+    Comment.findOneAndUpdate({commentId: req.body.commentId}, { $set: {commentText: req.body.commentTextContent} }, () => {
       Comment.findOne({commentId: req.body.commentId})
     })
     .catch(err => console.log(err))
