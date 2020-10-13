@@ -63,12 +63,8 @@ export function NewStickyForm(props) {
 
     // Create sticky in database
     API.createSticky({stickyId: stickyId, stickyText: newStickyText})
-      .then(data => {
-        console.log("sticky created! ", data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      // .then(data => console.log("sticky created! ", data))
+      .catch(err => console.log(err))
 
     // Clear form field
     setNewStickyText("");
