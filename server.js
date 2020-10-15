@@ -29,7 +29,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Requiring our routes
+// // Requiring our routes
 // const routes = require("./routes")
 // app.use(routes);
 require("./controllers/api-routes.js")(app);
