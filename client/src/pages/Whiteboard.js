@@ -114,14 +114,13 @@ function Whiteboard() {
           value="Start Countdown!"
           id="startCountdownBtn"
         ></input>
+      </form>
+      { renderPhase() }
 
-        { renderPhase() }
+      <StickyContainer />
 
-        <StickyContainer />
-
-        <button onClick={handleNextPhase}>Start Next Phase</button>
-    </form>
-      </div>
+      <button onClick={handleNextPhase}>Start Next Phase</button>
+    </div>
   );
 }
 

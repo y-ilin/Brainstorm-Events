@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import API from "../../utils/API";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
@@ -28,7 +28,6 @@ export function CommentButton(props) {
           commentText: "",
         }])
       }
-      console.log(props.allComments);
     });
 
     return () => {
