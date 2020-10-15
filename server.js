@@ -125,5 +125,14 @@ io.sockets.on("connection", socket => {
     socket.on("comment-text-change", data => {
       socket.broadcast.emit("incoming-comment-text-change", data)
     })
-    
+
+    // When one user adds a vote, broadcast to all other users
+    socket.on("add-vote", data => {
+      socket.broadcast.emit("incoming-add-vote", data)
+    })
+
+    // When one user removes a vote, broadcast to all other users
+    socket.on("remove-vote", data => {
+      socket.broadcast.emit("incoming-remove-vote", data)
+    })
 })
