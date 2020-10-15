@@ -26,12 +26,12 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(app.router);
 
 // Requiring our routes
-// require("./controllers/html-routes.js")(app); // Routing will now be served on the front end by React!
-require("./controllers/api-routes.js")(app);
-require("./controllers/sticky-api-routes.js")(app);
+const routes = require("./routes")
+app.use(app.routes);
+// require("./controllers/api-routes.js")(app);
+// require("./controllers/sticky-api-routes.js")(app);
 
 server.listen(app.get("port"), () => {
     console.log(
