@@ -2,6 +2,8 @@
 // const userController = require("../../controllers/api-routes");
 // const stickyController = require("../../controllers/sticky-api-routes");
 
+require("./controllers/api-routes.js")(app);
+require("./controllers/sticky-api-routes.js")(app);
 
 // // // Matches with "/api"
 // // router.route("/")
