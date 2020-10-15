@@ -11,10 +11,7 @@ export function StickyContainer() {
   // On load, get all the stickies from the database
   useEffect(() => {
     API.loadStickies()
-      .then(res => {
-        console.log(res.data)
-        setAllStickies(res.data);
-      })
+      .then(res => setAllStickies(res.data))
   }, [])
 
   return (
@@ -33,6 +30,8 @@ export function StickyContainer() {
           x={sticky.x}
           y={sticky.y}
           comments={sticky.comments}
+          allStickies={allStickies}
+          setAllStickies={setAllStickies}
         />
       })}
     </div>

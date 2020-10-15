@@ -23,18 +23,23 @@ module.exports = function(app) {
 
   // Move a sticky
   app.post("/api/movesticky", (req, res) => {
-    Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {x: req.body.x, y: req.body.y}}, () => {
-      Sticky.findOne({stickyId: req.body.stickyId})
+    Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {x: req.body.x, y: req.body.y}}, err => {
+      if (err) console.log(err)
     })
-    .catch(err => console.log(err))
   })
 
   // Change a sticky's text
   app.post("/api/changestickytext", (req, res) => {
-    Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {stickyText: req.body.stickyTextContent}}, () => {
-      Sticky.findOne({stickyId: req.body.stickyId})
+    Sticky.updateOne({stickyId: req.body.stickyId}, {$set: {stickyText: req.body.stickyTextContent}}, err => {
+      if (err) console.log(err)
     })
-    .catch(err => console.log(err))
+  })
+
+  // Delete a sticky
+  app.post("/api/deletesticky", (req, res) => {
+    Sticky.deleteOne({stickyId: req.body.stickyId}, err => {
+      if (err) console.log(err)
+    })
   })
 
   // Create a comment on a sticky
@@ -43,19 +48,14 @@ module.exports = function(app) {
       commentId: req.body.commentId,
       stickyId: req.body.stickyId,
     })
-      .then(({_id, stickyId}) => Sticky.findOneAndUpdate({stickyId: stickyId}, { $push: { comments: _id } }, { new: true }))
-      .then(Comment => {
-        console.log(Comment)
-        res.json(Comment)
-      });
+      .then(({_id, stickyId}) => Sticky.findOneAndUpdate({stickyId: stickyId}, { $push: { comments: _id } }, { new: true }));
   });
 
   // Change a comment's text
   app.post("/api/changecommenttext", (req, res) => {
-    Comment.findOneAndUpdate({commentId: req.body.commentId}, { $set: {commentText: req.body.commentTextContent} }, () => {
-      Comment.findOne({commentId: req.body.commentId})
+    Comment.findOneAndUpdate({commentId: req.body.commentId}, { $set: {commentText: req.body.commentTextContent} }, err => {
+      if (err) console.log(err)
     })
-    .catch(err => console.log(err))
   })
 
 };

@@ -109,6 +109,11 @@ io.sockets.on("connection", socket => {
       socket.broadcast.emit("incoming-sticky-text-change", data)
     })
 
+    // When one user deletes a sticky, broadcast to all other users
+    socket.on("delete-sticky", data => {
+      socket.broadcast.emit("incoming-delete-sticky", data)
+    })
+
     // When one user creates a comment on a sticky, broadcast to all other users
     socket.on("send-new-comment", data => {
       socket.broadcast.emit("incoming-new-comment", data)
@@ -118,4 +123,5 @@ io.sockets.on("connection", socket => {
     socket.on("comment-text-change", data => {
       socket.broadcast.emit("incoming-comment-text-change", data)
     })
+    
 })

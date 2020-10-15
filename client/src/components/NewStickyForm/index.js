@@ -31,6 +31,7 @@ export function NewStickyForm(props) {
         stickyText: data.stickyText,
         x: data.x,
         y: data.y,
+        comments: []
       }]);
     });
 
@@ -56,6 +57,7 @@ export function NewStickyForm(props) {
       stickyText: newStickyText,
       x: 50,
       y: 50,
+      comments: []
     }])
 
     // Send to server to broadcast to create sticky on everyone else's DOM

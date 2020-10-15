@@ -19,6 +19,9 @@ export default {
     changeStickyText: query => {
         return axios.post("/api/changestickytext", query)
     },
+    deleteSticky: query => {
+        return axios.post("/api/deletesticky", query)
+    },
     createComment: query => {
         return axios.post("/api/comment", query)
     },
