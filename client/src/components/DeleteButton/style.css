@@ -1,0 +1,7 @@
+.deleteStickyButton {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 20px;
+  padding: 0px 5px 1px 5px;
+}

@@ -90,7 +90,6 @@ export function Sticky(props) {
   }
 
   useEffect(() => {
-    console.log("calculating all voters")
     if (allVoters) {
       allVoters.includes(userData.id)
       ? setUserAlreadyVoted(true)
