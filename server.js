@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
+const path = require("path");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/brainstormEvents", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 
@@ -28,10 +29,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Requiring our routes
-const routes = require("./routes")
-app.use(routes);
-// require("./controllers/api-routes.js")(app);
-// require("./controllers/sticky-api-routes.js")(app);
+// const routes = require("./routes")
+// app.use(routes);
+require("./controllers/api-routes.js")(app);
+require("./controllers/sticky-api-routes.js")(app);
+
+// If no API routes are hit, send the React app
+res.sendFile(path.join(__dirname, "../client/build/index.html"));
 
 server.listen(app.get("port"), () => {
     console.log(
