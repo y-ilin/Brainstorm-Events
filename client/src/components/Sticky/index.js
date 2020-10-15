@@ -6,6 +6,7 @@ import SocketContext from "../../utils/SocketContext";
 import API from "../../utils/API";
 import CommentButton from "../CommentButton";
 import Comment from "../Comment";
+import DeleteButton from "../DeleteButton";
 
 export function Sticky(props) {
   const socket = useContext(SocketContext);
@@ -32,8 +33,19 @@ export function Sticky(props) {
     if (data.stickyId === props.stickyId) {
       setStickyTextContent(data.stickyTextContent)
     }
-
     })
+
+    // When another user deletes a sticky, listen here to delete it on current user's DOM
+    socket.on("incoming-delete-sticky", data => {
+      // If that sticky is this current sticky, move it
+      // if (data.stickyId === props.stickyId) {
+        const newAllStickies = props.allStickies.filter(sticky => {
+          return sticky.stickyId !== data.stickyId
+        })
+        props.setAllStickies(newAllStickies)
+      // }
+    })
+
   }, [])
 
   // Handle sticky drag
@@ -42,7 +54,6 @@ export function Sticky(props) {
   
     // On drag, send new position to server to broadcast to all other users
     socket.emit("sticky-move", {stickyId: props.stickyId, x: data.x, y: data.y})
-
   }
 
   // On drop after dragging a sticky, send new position to database
@@ -69,6 +80,8 @@ export function Sticky(props) {
       .then(data => console.log("sticky's new text saved in database! ", data))
       .catch(err => console.log(err))
   }
+  
+
 
   return (
       <Draggable
@@ -91,6 +104,11 @@ export function Sticky(props) {
             stickyId={props.stickyId}
             allComments={allComments}
             setAllComments={setAllComments}
+          />
+          <DeleteButton
+            stickyId={props.stickyId}
+            allStickies={props.allStickies}
+            setAllStickies={props.setAllStickies}
           />
           {allComments
           ? allComments.map(comment => {
