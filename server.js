@@ -33,6 +33,11 @@ app.use(app.routes);
 // require("./controllers/api-routes.js")(app);
 // require("./controllers/sticky-api-routes.js")(app);
 
+// If no API routes are hit, send the React app
+router.use(function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 server.listen(app.get("port"), () => {
     console.log(
       `==> 🌎  Server listening on port ${app.get("port")}. Visit http://localhost:${app.get("port")}/ in your browser.`,
