@@ -10,8 +10,13 @@
   border: 1px solid rgba(100, 100, 100, 0.5);
   display: grid;
   place-items: center;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 5px;
   text-align: center;
   margin: 0px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }

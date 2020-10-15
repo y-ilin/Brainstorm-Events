@@ -2,13 +2,17 @@ import React , { useState, useEffect, useContext } from "react";
 import "./style.css";
 import ContentEditable from "react-contenteditable";
 import Draggable from "react-draggable";
+import UserContext from "../../utils/UserContext";
 import SocketContext from "../../utils/SocketContext";
 import API from "../../utils/API";
 import CommentButton from "../CommentButton";
 import Comment from "../Comment";
 import DeleteButton from "../DeleteButton";
+import VoteButton from "../VoteButton";
+import VoteCount from "../VoteCount";
 
 export function Sticky(props) {
+  const userData = useContext(UserContext);
   const socket = useContext(SocketContext);
 
   // State to track sticky position
@@ -17,6 +21,10 @@ export function Sticky(props) {
   const [stickyTextContent, setStickyTextContent] = useState(props.stickyText);
   // State to track all the comments for this sticky
   const [allComments, setAllComments] = useState(props.comments);
+  // State to track all votes for this sticky
+  const [allVoters, setAllVoters] = useState(props.voters)
+  // State to track if this user has already voted for this sticky
+  const [userAlreadyVoted, setUserAlreadyVoted] = useState(false)
 
   useEffect(() => {
     // When another user moves a sticky, listen here to move it on current user's DOM
@@ -80,8 +88,15 @@ export function Sticky(props) {
       .then(data => console.log("sticky's new text saved in database! ", data))
       .catch(err => console.log(err))
   }
-  
 
+  useEffect(() => {
+    console.log("calculating all voters")
+    if (allVoters) {
+      allVoters.includes(userData.id)
+      ? setUserAlreadyVoted(true)
+      : setUserAlreadyVoted(false)
+    }
+  }, [allVoters])
 
   return (
       <Draggable
@@ -121,6 +136,15 @@ export function Sticky(props) {
           })
           : null
           }
+          <VoteButton
+            stickyId={props.stickyId}
+            allVoters={allVoters}
+            setAllVoters={setAllVoters}
+            userAlreadyVoted={userAlreadyVoted}
+          />
+          <VoteCount
+            allVoters={allVoters}
+          />
         </div>
       </Draggable>
   );

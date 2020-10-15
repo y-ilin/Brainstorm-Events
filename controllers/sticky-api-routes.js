@@ -58,4 +58,18 @@ module.exports = function(app) {
     })
   })
 
+  // Add a vote to a sticky
+  app.post("/api/addvote", (req, res) => {
+    Sticky.findOneAndUpdate({stickyId: req.body.stickyId}, { $push: { voters: req.body.userId }}, { new: true }, err => {
+      if (err) console.log(err)
+    })
+  })
+
+  // Remove a vote to a sticky
+  app.post("/api/removevote", (req, res) => {
+    Sticky.findOneAndUpdate({stickyId: req.body.stickyId}, { $pull: { voters: req.body.userId }}, { new: true }, err => {
+      if (err) console.log(err)
+    })
+  })
+
 };

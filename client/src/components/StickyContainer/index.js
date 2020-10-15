@@ -3,6 +3,7 @@ import "./style.css";
 import NewStickyForm from "../NewStickyForm";
 import Sticky from "../Sticky";
 import API from "../../utils/API";
+import UserContext from "../../utils/UserContext";
 
 export function StickyContainer() {
   // State to track all the stickies on the whiteboard
@@ -30,6 +31,7 @@ export function StickyContainer() {
           x={sticky.x}
           y={sticky.y}
           comments={sticky.comments}
+          voters={sticky.voters}
           allStickies={allStickies}
           setAllStickies={setAllStickies}
         />

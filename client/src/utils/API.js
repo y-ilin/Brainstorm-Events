@@ -27,5 +27,11 @@ export default {
     },
     changeCommentText: query => {
         return axios.post("/api/changecommenttext", query)
+    },
+    addVote: query => {
+        return axios.post("/api/addvote", query)
+    },
+    removeVote: query => {
+        return axios.post("/api/removevote", query)
     }
 }; 

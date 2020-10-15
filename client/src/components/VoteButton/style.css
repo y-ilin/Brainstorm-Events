@@ -1,0 +1,7 @@
+.voteButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 20px;
+  padding: 0px 5px 1px 5px;
+}
