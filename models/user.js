@@ -29,6 +29,10 @@ const userSchema = new Schema({
   userCreated: {
     type: Date,
     default: Date.now
+  },
+  stickiesVotedFor: {
+    type: Schema.Types.ObjectId,
+    ref: "Sticky"
   }
 });
 

@@ -24,7 +24,11 @@ const stickySchema = new Schema({
     type: Schema.Types.ObjectId,
     // type: Schema.Types.commentId,
     ref: "Comment"
-  }]
+  }],
+  voters: [{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }],
 });
 
 const Sticky = mongoose.model("Sticky", stickySchema);
