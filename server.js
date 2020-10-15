@@ -29,7 +29,7 @@ app.use(passport.session());
 
 // Requiring our routes
 const routes = require("./routes")
-app.use(app.routes);
+app.use(routes);
 // require("./controllers/api-routes.js")(app);
 // require("./controllers/sticky-api-routes.js")(app);
 
