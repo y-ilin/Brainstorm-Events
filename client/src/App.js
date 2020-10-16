@@ -16,8 +16,16 @@ import axios from "axios";
 function App() {
   // Connect user to socket
   const socket = useMemo(() => {
-    return io.connect()
+    // return io.connect()
+    return io()
+    // return io.connect({
+    //   transports: ['websocket']
+    // })
   }, []);
+
+  socket.on("reconnect_attempt", () => {
+    socket.io.opts.transports = ["polling", "websocket"];
+  })
 
   // Tracking if the user is logged in, and the user data
   const [loggedIn, setLoggedIn] = useState(false);

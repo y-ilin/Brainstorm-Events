@@ -17,7 +17,6 @@ export function CommentButton(props) {
       //   console.log("that's from u dummy")
       //   return
       // }
-      console.log("adding new comment from another user")
 
       // If the incoming new comment relates to this sticky, then
       // create the comment on this sticky on this user's DOM as well

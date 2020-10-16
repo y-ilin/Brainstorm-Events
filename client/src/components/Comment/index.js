@@ -14,11 +14,14 @@ export function Comment(props) {
     // When another user changes a comment's text, listen here to update the text on current user's DOM
     socket.on("incoming-comment-text-change", data => {
       // If that comment is this current comment, change the comment it
-
       if (data.commentId === props.commentId) {
       setCommentTextContent(data.stickyTextContent)
       }
     })
+
+    return () => {
+      socket.off("incoming-comment-text-change")
+    }
   }, [])
 
   // After finishing changing a sticky's text

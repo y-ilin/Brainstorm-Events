@@ -31,7 +31,8 @@ export function NewStickyForm(props) {
         stickyText: data.stickyText,
         x: data.x,
         y: data.y,
-        comments: []
+        comments: [],
+        voters: []
       }]);
     });
 

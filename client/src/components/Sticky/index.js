@@ -35,26 +35,39 @@ export function Sticky(props) {
       }
     })
 
+    return () => {
+      socket.off("incoming-sticky-move");
+    }
+  }, [props.stickyId, socket])
+
+  useEffect(() => {
     // When another user changes a sticky's text, listen here to update the text on current user's DOM
     socket.on("incoming-sticky-text-change", data => {
-    // If that sticky is this current sticky, move it
+    // If that sticky is this current sticky, change its text
     if (data.stickyId === props.stickyId) {
       setStickyTextContent(data.stickyTextContent)
     }
     })
 
+    return () => {
+      socket.off("incoming-sticky-text-change");
+    }
+  }, [props.stickyId, socket])
+
+
+  useEffect(() => {
     // When another user deletes a sticky, listen here to delete it on current user's DOM
     socket.on("incoming-delete-sticky", data => {
-      // If that sticky is this current sticky, move it
-      // if (data.stickyId === props.stickyId) {
         const newAllStickies = props.allStickies.filter(sticky => {
           return sticky.stickyId !== data.stickyId
         })
         props.setAllStickies(newAllStickies)
-      // }
     })
 
-  }, [])
+    return () => {
+      socket.off("incoming-delete-sticky");
+    }
+  }, [props.allStickies, socket])
 
   // Handle sticky drag
   const handleDrag = (e, data) => {
