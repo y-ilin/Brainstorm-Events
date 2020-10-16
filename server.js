@@ -29,11 +29,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// // Requiring our routes
-// const routes = require("./routes")
-// app.use(routes);
+// Requiring our api routes
 require("./controllers/api-routes.js")(app);
 require("./controllers/sticky-api-routes.js")(app);
+// If no api routes are hit, send the front end
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"))
+})
 
 server.listen(app.get("port"), () => {
     console.log(
