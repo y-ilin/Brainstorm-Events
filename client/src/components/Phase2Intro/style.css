@@ -1,0 +1,10 @@
+.phaseIntro.phase2 {
+  background-color: rgba(255, 59, 124, 0.8);
+  background-image: radial-gradient(
+    rgb(255, 225, 234),
+    rgb(255, 191, 212),
+    rgba(255, 110, 74, 0.8),
+    rgba(255, 59, 124, 0.8)
+  );
+  box-shadow: 0px 0px 30px 10px rgba(255, 59, 124, 0.6);
+}

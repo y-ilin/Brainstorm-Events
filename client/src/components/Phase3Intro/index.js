@@ -4,8 +4,17 @@ import "./style.css";
 export function Phase3Intro() {
   return (
     <div className={"phaseIntro phase3"}>
-      <p>This is phase 3 coming up</p>
-    </div>
+      <div className="introGroup introGroup1">
+        <p>Welcome to Phase 3:</p>
+        <p>Voting</p>
+      </div>
+      <div className="introGroup introGroup2">
+        <p>Which ideas should we explore?</p>
+        <p>Have your say</p>
+      </div>
+      <div className="introGroup introGroup3">
+        <p>👀 All stickies are anonymous 👀</p>
+      </div>    </div>
   );
 }
 
