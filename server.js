@@ -63,13 +63,13 @@ io.sockets.on("connection", socket => {
         currentPhase++;
         // Tell all clients to show next phase intro
         io.sockets.emit("give-phase-intro")
-      }, currentPhaseDuration*1000);
+      }, currentPhaseDuration*1000*60); // in minutes
     }
 
     const beginNextPhase = (currentPhaseDuration) => {
       console.log(`Beginning phase ${currentPhase} for ${currentPhaseDuration} seconds!`);
       // Tell all clients to begin phase countdown
-      io.sockets.emit("begin-phase", {currentPhase: currentPhase, duration: currentPhaseDuration})
+      io.sockets.emit("begin-phase", {currentPhase: currentPhase, duration: currentPhaseDuration*60}) // in ms * minutes
       // Begin phase countdown on server side
       serverTimer(currentPhaseDuration);
     }
