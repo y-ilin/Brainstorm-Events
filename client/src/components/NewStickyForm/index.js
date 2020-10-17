@@ -75,16 +75,18 @@ export function NewStickyForm(props) {
 
 
   return (
-    <form id="countdownForm">
-      <input
-        onChange={handleNewStickyTextChange}
-        type="text"
-        name="newStickyText"
-        id="newStickyText"
-        placeholder="Your idea!"
-      />
-      <button onClick={handleCreateSticky}>Stick it on the whiteboard!</button>
-    </form>
+    <div id="newStickyFormDiv">
+      <form id="newStickyForm">
+        <input
+          onChange={handleNewStickyTextChange}
+          type="text"
+          name="newStickyText"
+          id="newStickyText"
+          placeholder="Your idea!"
+        />
+        <button onClick={handleCreateSticky}>Post!</button>
+      </form>
+    </div>
   );
 }
 

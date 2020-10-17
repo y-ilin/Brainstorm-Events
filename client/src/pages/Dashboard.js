@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import SocketContext from "../utils/SocketContext";
+import "./Dashboard.css";
 
 function Dashboard() {
   // const userData = useContext(UserContext);
@@ -32,41 +33,46 @@ function Dashboard() {
   }
 
   return (
-    <div>
-      <h1>This is your dashboard</h1>
-      <Link to="/whiteboard">Go to whiteboard!</Link>
-      <form id="countdownForm">
-        <input
-          // value={durations.phase1duration}
-          onChange={handleDurationChange}
-          type="number"
-          name="phase1duration"
-          id="phase1duration"
-          placeholder="Phase 1 duration"
-        />
-        <input
-          // value={durations.phase2duration}
-          onChange={handleDurationChange}
-          type="number"
-          name="phase2duration"
-          id="phase2duration"
-          placeholder="Phase 2 duration"
-        />
-        <input
-          // value={durations.phase3duration}
-          onChange={handleDurationChange}
-          type="number"
-          name="phase3duration"
-          id="phase3duration"
-          placeholder="Phase 3 duration"
-        />
-        <input
-          onClick={handleTimerFormSubmit}
-          type="submit"
-          value="Start Countdown!"
-          id="startCountdownBtn"
-        ></input>
-      </form>
+    <div className="dashboardBackground">
+      <div className="dashboardDiv">
+        <h1>Welcome to the waiting room</h1>
+        <form id="countdownForm">
+          <p>How long should each phase go for?</p>
+          <input
+            // value={durations.phase1duration}
+            onChange={handleDurationChange}
+            type="number"
+            name="phase1duration"
+            id="phase1duration"
+            placeholder="Phase 1 (minutes)"
+          />
+          <input
+            // value={durations.phase2duration}
+            onChange={handleDurationChange}
+            type="number"
+            name="phase2duration"
+            id="phase2duration"
+            placeholder="Phase 2 (minutes)"
+          />
+          <input
+            // value={durations.phase3duration}
+            onChange={handleDurationChange}
+            type="number"
+            name="phase3duration"
+            id="phase3duration"
+            placeholder="Phase 3 (minutes)"
+          />
+          <input
+            onClick={handleTimerFormSubmit}
+            type="submit"
+            value="Set phase durations!"
+            id="startCountdownBtn"
+          ></input>
+        </form>
+        <div id="whiteboardButtonDiv">
+          <Link to="/whiteboard" id="whiteboardButton">Go to whiteboard!</Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -17,7 +17,6 @@ export function StickyContainer(props) {
 
   return (
     <div className="stickyContainer">
-      <p>This is the sticky container</p>
       { props.currentPhase === 1
       ? <NewStickyForm
         allStickies={allStickies}
