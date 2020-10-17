@@ -127,11 +127,14 @@ export function Sticky(props) {
             className="sticky"
             onBlur={handleFinishTextChange}
           />
-          <CommentButton
+          { props.currentPhase === 2
+          ? <CommentButton
             stickyId={props.stickyId}
             allComments={allComments}
             setAllComments={setAllComments}
-          />
+            />
+          : null
+          }
           <DeleteButton
             stickyId={props.stickyId}
             allStickies={props.allStickies}
@@ -148,15 +151,21 @@ export function Sticky(props) {
           })
           : null
           }
-          <VoteButton
+          { props.currentPhase === 3
+          ? <VoteButton
             stickyId={props.stickyId}
             allVoters={allVoters}
             setAllVoters={setAllVoters}
             userAlreadyVoted={userAlreadyVoted}
-          />
-          <VoteCount
+            />
+          : null
+          }
+          { props.currentPhase === 3
+          ? <VoteCount
             allVoters={allVoters}
-          />
+            />
+          : null
+          }
         </div>
       </Draggable>
   );

@@ -5,7 +5,7 @@ import Sticky from "../Sticky";
 import API from "../../utils/API";
 import UserContext from "../../utils/UserContext";
 
-export function StickyContainer() {
+export function StickyContainer(props) {
   // State to track all the stickies on the whiteboard
   const [allStickies, setAllStickies] = useState([]);
 
@@ -18,11 +18,13 @@ export function StickyContainer() {
   return (
     <div className="stickyContainer">
       <p>This is the sticky container</p>
-      <NewStickyForm
+      { props.currentPhase === 1
+      ? <NewStickyForm
         allStickies={allStickies}
         setAllStickies={setAllStickies}
-      />
-
+        />
+      : null
+      }
       {allStickies.map(sticky => {
         return <Sticky
           key={sticky.stickyId}
@@ -34,6 +36,7 @@ export function StickyContainer() {
           voters={sticky.voters}
           allStickies={allStickies}
           setAllStickies={setAllStickies}
+          currentPhase={props.currentPhase}
         />
       })}
     </div>
