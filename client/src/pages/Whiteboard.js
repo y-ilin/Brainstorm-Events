@@ -7,6 +7,7 @@ import UserContext from "../utils/UserContext";
 // import Phase3 from "../components/Phase3";
 import PhaseIntro from "../components/PhaseIntro";
 import StickyContainer from "../components/StickyContainer";
+import Timer from "../components/Timer";
 import SocketContext from "../utils/SocketContext";
 
 function Whiteboard() {
@@ -19,6 +20,8 @@ function Whiteboard() {
   const [showIntro, setShowIntro] = useState(true);
   // Manage whether to show the very first intro
   const [showFirstIntro, setShowFirstIntro] = useState(true);
+  // Track time left in each phase
+  const [timeLeftState, setTimeLeftState] = useState(0);
 
   // When client enters the Whiteboard, ask server to get client up to speed on
   // what phase the whole team is currently in
@@ -48,6 +51,7 @@ function Whiteboard() {
       // Start countdown
       const countdown = setInterval(() => {
         timeLeft--;
+        setTimeLeftState(timeLeft)
         console.log(timeLeft); // This time to later be displayed on DOM
 
         // If time runs out, clear the countdown interval
@@ -72,7 +76,9 @@ function Whiteboard() {
       <div className={"blotch blotch1"} currentPhase={currentPhase}></div>
       <div className={"blotch blotch2"} currentPhase={currentPhase}></div>
       <div className={"blotch blotch3"} currentPhase={currentPhase}></div>
-
+      <Timer
+        timeLeft={timeLeftState}
+      />
       <StickyContainer
         currentPhase={currentPhase}
       />
@@ -84,7 +90,6 @@ function Whiteboard() {
         />
       : null
       }
-      {/* <button onClick={handleNextPhase}>Start Next Phase</button> */}
     </div>
   );
 }

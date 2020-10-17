@@ -8,13 +8,13 @@
 
 .whiteboard.phase1 {
   background-color: rgb(255, 255, 241);
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     -45deg,
     rgb(255, 191, 107),
     rgb(255, 245, 108)
-  );
+  ); */
 }
-/* .whiteboard.phase1 > .blotch1 {
+.whiteboard.phase1 > .blotch1 {
   position: fixed;
   top: 0px;
   right: 0px;
@@ -34,16 +34,15 @@
   background-color: rgba(255, 185, 34, 0.6);
   box-shadow: 0 0 10vw 30vw rgba(255, 185, 34, 0.6);
 }
- */
 .whiteboard.phase1 > .blotch3 {
   position: fixed;
   bottom: -15vw;
-  left: 70vw;
+  left: 50vw;
   width: 20vw;
   height: 20vw;
   border-radius: 20vw;
-  background-color: rgba(255, 255, 41, 0.3);
-  box-shadow: 0 0 5vw 10vw rgba(255, 255, 41, 0.3);
+  background-color: rgba(255, 255, 137, 0.3);
+  box-shadow: 0 0 10vw 30vw rgba(255, 255, 137, 0.3);
 }
 
 .whiteboard.phase2 {
@@ -91,29 +90,29 @@
   background-image: linear-gradient(
     -45deg,
     rgb(193, 100, 255),
-    rgb(103, 100, 255)
+    rgb(75, 72, 255)
   );
 }
-/* .whiteboard.phase3 > .blotch1 {
+.whiteboard.phase3 > .blotch1 {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  width: 20vw;
-  height: 20vw;
+  top: -10vw;
+  right: -10vw;
+  width: 5vw;
+  height: 5vw;
   border-radius: 20vw;
-  background-color: rgba(97, 39, 255, 0.7);
-  box-shadow: 0 0 20vw 60vw rgba(97, 39, 255, 0.7);
+  background-color: rgba(12, 28, 247, 0.2);
+  box-shadow: 0 0 30vw 10vw rgba(12, 28, 247, 0.2);
 }
 .whiteboard.phase3 > .blotch2 {
   position: fixed;
-  top: 25vh;
-  left: 0px;
-  width: 20vw;
-  height: 20vw;
+  top: 40vh;
+  left: -15vw;
+  width: 5vw;
+  height: 5vw;
   border-radius: 20vw;
-  background-color: rgba(140, 0, 255, 0.4);
-  box-shadow: 0 0 30vw 20vw rgba(140, 0, 255, 0.4);
-} */
+  background-color: rgba(220, 176, 255, 0.3);
+  box-shadow: 0 0 30vw 20vw rgba(220, 176, 255, 0.3);
+}
 .whiteboard.phase3 > .blotch3 {
   position: fixed;
   bottom: -25vw;
@@ -123,4 +122,8 @@
   border-radius: 20vw;
   background-color: rgba(14, 30, 255, 0.1);
   box-shadow: 0 0 20vw 15vw rgba(14, 30, 255, 0.1);
+}
+
+div:focus {
+  outline: none;
 }

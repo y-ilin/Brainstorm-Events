@@ -1,6 +1,6 @@
 #newStickyFormDiv {
   position: fixed;
-  bottom: 4vh;
+  bottom: 6vh;
   width: 100vw;
   display: flex;
   justify-content: center;
