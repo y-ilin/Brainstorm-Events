@@ -45,6 +45,10 @@ server.listen(app.get("port"), () => {
 
 // On connection to socket.io
 io.sockets.on("connection", socket => {
+    socket.on("enter-whiteboard", () => {
+      socket.emit("welcome-whiteboard", {currentPhase: currentPhase})
+    })
+    
     socket.emit("welcome-waiting-room", "Hello, welcome to the waiting room.");    
 
     let currentPhase=1;
@@ -57,6 +61,8 @@ io.sockets.on("connection", socket => {
         console.log(`server: timer ${currentPhase} finished!`);
         // Now continue to next phase, begin for loop again
         currentPhase++;
+        // Tell all clients to show next phase intro
+        io.sockets.emit("give-phase-intro")
       }, currentPhaseDuration*1000);
     }
 
