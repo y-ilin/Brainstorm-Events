@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-// import "./style.css";
+import { Link } from "react-router-dom";
+import "./Login.css";
 import API from "../utils/API";
 
 function Login() {
@@ -53,47 +54,53 @@ function Login() {
   }
 
   return (
-    <div>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3">
-            <h2>Login</h2>
-            <form className="login">
-              <div className="form-group">
-                <input
-                  value={formObject.email}
-                  onChange={handleInputChange}
-                  name="email"
-                  type="email"
-                  className="form-control"
-                  id="email-input"
-                  placeholder="EMAIL"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  value={formObject.password}
-                  onChange={handleInputChange}
-                  name="password"
-                  type="password"
-                  className="form-control formMargin"
-                  id="password-input"
-                  placeholder="PASSWORD"
-                />
-              </div>
-              <button
-                onClick={handleLoginSubmit}
-                id="form-button"
-                type="submit"
-                className="btn btn-default login-button"
-              >
-                Login
-              </button>
-            </form>
-            <br />
-            <p>Or sign up <a href="/signup">here</a></p>
-          </div>
+    <div className="loginSignupBackground">
+      <div className="loginSignupContainer">
+        <div className="loginSignupGroup">
+          <h2>Login</h2>
+          <form className="login">
+            <div className="form-group">
+              <input
+                value={formObject.email}
+                onChange={handleInputChange}
+                name="email"
+                type="email"
+                className="form-control"
+                id="email-input"
+                placeholder="EMAIL"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                value={formObject.password}
+                onChange={handleInputChange}
+                name="password"
+                type="password"
+                className="form-control formMargin"
+                id="password-input"
+                placeholder="PASSWORD"
+              />
+            </div>
+            <button
+              onClick={handleLoginSubmit}
+              id="form-button"
+              type="submit"
+              className="btn btn-default login-button"
+            >
+              Login
+            </button>
+          </form>
         </div>
+        {/* <div className="loginSignupGroup">
+          <p>Or sign up <a href="/signup">here</a></p>
+        </div> */}
+        <Link
+          to="/signup"
+          className="loginSignupGroup"
+          id="goToSignupButton"
+        >
+          Or sign up here
+        </Link>
       </div>
     </div>
   );

@@ -1,0 +1,63 @@
+.loginSignupBackground {
+  background-color: rgb(227, 205, 255);
+  background-image: linear-gradient(
+    20deg,
+    rgb(255, 209, 149),
+    rgb(168, 101, 255),
+    rgb(158, 116, 212)
+  );
+  min-width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  /* display: grid;
+    place-items: center; */
+}
+
+.loginSignupContainer {
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  border-radius: 50px;
+  text-align: center;
+  margin: 2vw;
+  padding: 15vh 5vh 10vh 5vh;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginSignupGroup {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
+  text-align: center;
+  width: 50%;
+  margin: 1vw;
+  padding: 2vw 0;
+}
+
+.form-group > input {
+  border-radius: 50px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1vw 2vw;
+  margin: 0.5vw;
+}
+
+.login > button,
+.signup > button {
+  border-radius: 50px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1vw 2vw;
+  margin: 0.5vw;
+  box-shadow: 0 0 10px 2px rgba(102, 19, 255, 0.2);
+}
+
+#goToSignupButton {
+  text-decoration: none;
+  color: rgb(95, 95, 95);
+}
+
+input:focus {
+  outline: none;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import "./style.css";
 import API from "../utils/API";
 
@@ -55,9 +56,9 @@ function Signup() {
 
   return (
     <div>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3">
+      <div className="loginSignupBackground">
+        <div className="loginSignupContainer">
+          <div className="loginSignupGroup">
             <h2>Sign Up</h2>
             <form className="signup">
             <div className="form-group">
@@ -125,9 +126,15 @@ function Signup() {
                 Sign Up
               </button>
             </form>
-            <br />
-            <p>Or log in <a href="/login">here</a></p>
           </div>
+          <Link
+            to="/login"
+            className="loginSignupGroup"
+            id="goToSignupButton"
+          >
+            Or log in here
+          </Link>
+
         </div>
       </div>
     </div>
