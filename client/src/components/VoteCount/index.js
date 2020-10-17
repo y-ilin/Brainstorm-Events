@@ -6,7 +6,7 @@ export function VoteCount(props) {
   const voteCount = () => props.allVoters ? props.allVoters.length : 0;
 
   return (
-    <div>{voteCount()}</div>
+    <div className="voteCount">{voteCount()}</div>
   );
 }
 

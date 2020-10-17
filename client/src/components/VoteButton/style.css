@@ -1,7 +1,11 @@
-.voteButton {
+.voteStickyButton {
   position: absolute;
   top: 0px;
   right: 0px;
   border-radius: 20px;
-  padding: 0px 5px 1px 5px;
+  padding: 0px 6px 3px 6px;
+  border: 1px solid white;
+  background-color: rgba(98, 31, 255, 0.8);
+  color: white;
+  font-size: 1em;
 }

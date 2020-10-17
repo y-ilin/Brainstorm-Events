@@ -1,8 +1,8 @@
 .comment {
-  background-color: rgb(207, 198, 255);
+  background-color: rgba(255, 255, 255, 0.75);
   width: 200px;
-  height: 100px;
-  border: 1px solid rgba(100, 100, 100, 0.5);
+  height: 90px;
+  border: 1px solid rgba(255, 255, 255, 1);
   display: grid;
   place-items: center;
   overflow-y: scroll;
