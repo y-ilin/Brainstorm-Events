@@ -1,16 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./whiteboard.css";
-// import io from "socket.io-client";
 import UserContext from "../utils/UserContext";
-// import Phase1 from "../components/Phase1";
-// import Phase2 from "../components/Phase2";
-// import Phase3 from "../components/Phase3";
 import PhaseIntro from "../components/PhaseIntro";
 import Prompt from "../components/Prompt";
 import StickyContainer from "../components/StickyContainer";
 import Timer from "../components/Timer";
 import SocketContext from "../utils/SocketContext";
-import { PromiseProvider } from "mongoose";
 
 function Whiteboard(props) {
   const userData = useContext(UserContext);

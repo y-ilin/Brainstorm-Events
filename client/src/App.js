@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import UserContext from "./utils/UserContext";
 import SocketContext from "./utils/SocketContext";
+import Nav from "./components/Nav";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
@@ -68,33 +69,35 @@ function App() {
         {/* <PromptContext.Provider value={""}> */}
             <SocketContext.Provider value={socket}>
               <UserContext.Provider value={userData}>
-                {/* <Nav /> */}
+                { loggedIn
+                  ? <Nav
+                    setLoggedIn={setLoggedIn}
+                    />
+                  : null
+                }
                 <Switch>
                   <Route exact path="/">
                     <Redirect to="/login" />
                   </Route>
                   <Route exact path="/login">
-                    {loggedIn ?
-                      <Redirect to="/dashboard" />
-                      :
-                      <Login setLoggedIn={setLoggedIn}/>
+                    {loggedIn
+                      ? <Redirect to="/dashboard" />
+                      : <Login setLoggedIn={setLoggedIn}/>
                     }
                   </Route>
                   <Route exact path="/signup">
                       <Signup setLoggedIn={setLoggedIn}/>
                   </Route>
                   <Route path="/dashboard">
-                    {loggedIn ? 
-                      <Dashboard prompt={prompt} setPrompt={setPrompt}/>
-                      :  
-                      <Redirect to="/login"></Redirect> 
+                    {loggedIn
+                      ? <Dashboard prompt={prompt} setPrompt={setPrompt}/>
+                      : <Redirect to="/login"></Redirect> 
                     }
                   </Route>
                   <Route path="/whiteboard">
-                    {loggedIn ? 
-                      <Whiteboard prompt={prompt} setPrompt={setPrompt}/>
-                      :  
-                      <Redirect to="/login"></Redirect> 
+                    {loggedIn
+                      ? <Whiteboard prompt={prompt} setPrompt={setPrompt}/>
+                      : <Redirect to="/login"></Redirect> 
                     }
                   </Route>
                   <Route path="*">
@@ -102,10 +105,9 @@ function App() {
                   </Route>
 
                   <Route exact path="/logout">
-                    {loggedIn ?
-                      <Logout setLoggedIn={setLoggedIn}/> 
-                      :
-                      <Redirect to="/login" />
+                    {loggedIn
+                      ? <Logout setLoggedIn={setLoggedIn}/> 
+                      : <Redirect to="/login" />
                     }
                   </Route>
                 </Switch>

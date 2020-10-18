@@ -36,3 +36,7 @@ button:active {
   border: none;
   text-decoration: none;
 }
+
+a:visited {
+  color: black;
+}

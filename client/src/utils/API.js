@@ -7,6 +7,9 @@ export default {
     signUp: query => {
         return axios.post("/api/signup", query);
     },
+    logout: query => {
+        return axios.get("/api/logout", query)
+    },
     loadStickies: () => {
         return axios.get("/api/sticky")
     },

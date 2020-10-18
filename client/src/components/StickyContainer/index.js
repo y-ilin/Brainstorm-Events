@@ -17,7 +17,7 @@ export function StickyContainer(props) {
 
   return (
     <div className="stickyContainer">
-      { props.currentPhase === 1
+      { props.currentPhase === 1 || props.currentPhase === "finished"
       ? <NewStickyForm
         allStickies={allStickies}
         setAllStickies={setAllStickies}
