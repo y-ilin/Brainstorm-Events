@@ -20,7 +20,7 @@ function Dashboard() {
   const handleDurationChange = e => {
     setDurations({
       ...durations,
-      [e.target.name]: parseInt(e.target.value)
+      [e.target.name]: parseFloat(e.target.value)
     })
   }
 
