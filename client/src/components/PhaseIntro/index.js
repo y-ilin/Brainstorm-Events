@@ -12,9 +12,13 @@ export function PhaseIntro(props) {
 
   const handleNextPhase = e => {
     e.preventDefault();
-    console.log("Begin next phase")
     socket.emit("begin-next-phase");
     props.setShowFirstIntro(false);
+  }
+
+  const handleFinishPhases = e => {
+    e.preventDefault();
+    socket.emit("client-finished-phases");
   }
 
   const renderPhaseIntro = () => {
@@ -32,12 +36,20 @@ export function PhaseIntro(props) {
   return (
     <div className="phaseIntroBackground">
       { renderPhaseIntro() }
-      <button
-        onClick={handleNextPhase}
-        className="nextPhaseButton"
-      >
-        Start Next Phase
-      </button>
+      { props.currentPhase < 3
+        ? <button
+          onClick={handleNextPhase}
+          className="nextPhaseButton"
+          >
+          Begin Phase
+          </button>
+        : <button
+          onClick={handleFinishPhases}
+          className="nextPhaseButton"
+          >
+          Go to whiteboard
+          </button>
+      }
     </div>
   );
 }

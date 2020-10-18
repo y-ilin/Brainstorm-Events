@@ -14,7 +14,8 @@ export function Phase3Intro() {
       </div>
       <div className="introGroup introGroup3">
         <p>👀 All stickies are anonymous 👀</p>
-      </div>    </div>
+      </div>
+    </div>
   );
 }
 
