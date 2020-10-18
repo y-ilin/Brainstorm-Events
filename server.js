@@ -128,7 +128,9 @@ io.sockets.on("connection", socket => {
       // Store countdown duration data given by user
       phase1duration = data.phase1duration;
       phase2duration = data.phase2duration;
-      phase3duration = data.phase3duration;      
+      phase3duration = data.phase3duration;  
+      
+      io.sockets.emit("incoming-durations", data)
     })
 
     // When one user creates new sticky, broadcast to all other users
@@ -178,7 +180,11 @@ io.sockets.on("connection", socket => {
 
     // When a user submits a prompt
     socket.on("submit-prompt", data => {
-      console.log(data)
       io.sockets.emit("incoming-prompt", data)
+    })
+
+    // Moving the whole team to the whiteboard
+    socket.on("go-to-whiteboard", () => {
+      io.sockets.emit("moving-you-to-whiteboard")
     })
 })

@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import SocketContext from "../utils/SocketContext";
 import "./Dashboard.css";
 import "font-awesome/css/font-awesome.min.css";
 
 function Dashboard(props) {
+  let history = useHistory();
   // const userData = useContext(UserContext);
   const socket = useContext(SocketContext);
-
-  // // State to manage which phase the event is in, or if the event is completed
-  // const [currentPhase, setCurrentPhase] = useState(1);
 
   // Prompt to show at top of screen
   const [prompt, setPrompt] = useState("")
@@ -19,10 +17,36 @@ function Dashboard(props) {
     phase2duration: 0,
     phase3duration: 0,
   })
+  
   // Track if a prompt has been submitted
   const [promptDone, setPromptDone] = useState(false)
   // Track if a phase durations have been submitted
   const [durationsDone, setDurationsDone] = useState(false)
+
+  useEffect(() => {
+    if (props.prompt) {
+      setPromptDone(true)
+    }
+  }, [props.prompt])
+
+  useEffect(() => {
+    socket.on("incoming-durations", data => {
+      setDurations({
+        phase1duration: data.phase1duration,
+        phase2duration: data.phase2duration,
+        phase3duration: data.phase3duration,
+      })
+      setDurationsDone(true)
+    })
+
+    socket.on("moving-you-to-whiteboard", () => {
+      history.push("/whiteboard")
+    })
+
+    if (props.prompt!=="") {
+      setPromptDone(true)
+    }
+  }, [])
 
   const handlePromptChange = e => {
     console.log(e.target.value)
@@ -53,12 +77,15 @@ function Dashboard(props) {
     e.preventDefault();
     props.setPrompt(prompt)
     socket.emit("submit-prompt", prompt)
-    console.log(prompt)
     if (prompt !== "") {
       setPromptDone(true)
     } else {
       setPromptDone(false)
     }
+  }
+
+  const handleGoToWhiteboard = () => {
+    socket.emit("go-to-whiteboard")
   }
 
   return (
@@ -70,7 +97,7 @@ function Dashboard(props) {
           <div id="promptFormDiv">
             <input
               onChange={handlePromptChange}
-              // value={props.prompt}
+              value={props.prompt ? props.prompt : null}
               type="text"
               name="promptInput"
               id="promptInput"
@@ -94,6 +121,7 @@ function Dashboard(props) {
             <input
               // value={durations.phase1duration}
               onChange={handleDurationChange}
+              value={durations.phase1duration ? durations.phase1duration : null}
               type="number"
               name="phase1duration"
               id="phase1duration"
@@ -102,6 +130,7 @@ function Dashboard(props) {
             <input
               // value={durations.phase2duration}
               onChange={handleDurationChange}
+              value={durations.phase2duration ? durations.phase2duration : null}
               type="number"
               name="phase2duration"
               id="phase2duration"
@@ -110,6 +139,7 @@ function Dashboard(props) {
             <input
               // value={durations.phase3duration}
               onChange={handleDurationChange}
+              value={durations.phase3duration ? durations.phase3duration : null}
               type="number"
               name="phase3duration"
               id="phase3duration"
@@ -128,7 +158,14 @@ function Dashboard(props) {
           </div>
         </form>
         <div id="whiteboardButtonDiv">
-          { promptDone && durationsDone
+          <Link
+            to="/whiteboard"
+            id="whiteboardButton"
+            onClick={handleGoToWhiteboard}
+          >
+            Go to whiteboard!
+          </Link>
+          {/* { promptDone && durationsDone
             ? <Link
               to="/whiteboard"
               id="whiteboardButton"
@@ -140,7 +177,7 @@ function Dashboard(props) {
             >
               Go to whiteboard!
             </div>
-          }
+          } */}
          
         </div>
       </div>

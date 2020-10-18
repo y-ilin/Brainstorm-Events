@@ -58,7 +58,6 @@ function App() {
   // On page load
   useEffect(() => {
     socket.on("incoming-prompt", data => {
-      console.log("incomign prompt on app:, " , data)
       setPrompt(data)
     })
   }, []);
