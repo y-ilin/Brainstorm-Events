@@ -17,8 +17,8 @@ function Whiteboard(props) {
   const [showIntro, setShowIntro] = useState(true);
   // Manage whether to show the very first intro
   const [showFirstIntro, setShowFirstIntro] = useState(true);
-  // Track time left in each phase
-  const [timeLeftState, setTimeLeftState] = useState(0);
+  // // Track time left in each phase
+  // const [timeLeftState, setTimeLeftState] = useState(0);
   // Prompt to show at top of screen
   const [prompt, setPrompt] = useState("")
 
@@ -49,20 +49,20 @@ function Whiteboard(props) {
       setCurrentPhase(data.currentPhase);
       setShowIntro(false);
 
-      let timeLeft = data.duration;
+      // let timeLeft = data.duration;
 
-      // Start countdown
-      const countdown = setInterval(() => {
-        timeLeft--;
-        setTimeLeftState(timeLeft)
-        console.log(timeLeft); // This time to later be displayed on DOM
+      // // Start countdown
+      // const countdown = setInterval(() => {
+      //   timeLeft--;
+      //   setTimeLeftState(timeLeft)
+      //   console.log(timeLeft); // This time to later be displayed on DOM
 
-        // If time runs out, clear the countdown interval
-        if (timeLeft <= 0) {
-          console.log("client: phase complete")
-          clearInterval(countdown);
-        }
-      }, 1000)
+      //   // If time runs out, clear the countdown interval
+      //   if (timeLeft <= 0) {
+      //     console.log("client: phase complete")
+      //     clearInterval(countdown);
+      //   }
+      // }, 1000)
     })
 
     socket.on("show-final-whiteboard", () => {
@@ -79,18 +79,18 @@ function Whiteboard(props) {
   //   socket.emit("begin-next-phase");
   //   setShowFirstIntro(false);
   // }
+
   
   return (
     <div className={"whiteboard phase"+currentPhase} currentPhase={currentPhase}>
       <div className={"blotch blotch1"} currentPhase={currentPhase}></div>
       <div className={"blotch blotch2"} currentPhase={currentPhase}></div>
       <div className={"blotch blotch3"} currentPhase={currentPhase}></div>
-      { currentPhase === "finished"
-        ? null
-        : <Timer
-          timeLeft={timeLeftState}
-          />
-      }
+      <Timer
+        // timeLeft={timeLeftState}
+      />
+        
+      
       <Prompt
         prompt={props.prompt}
       />

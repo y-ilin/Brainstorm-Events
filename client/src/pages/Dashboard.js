@@ -97,7 +97,7 @@ function Dashboard(props) {
           <div id="promptFormDiv">
             <input
               onChange={handlePromptChange}
-              value={props.prompt ? props.prompt : null}
+              value={props.prompt ? props.prompt : undefined}
               type="text"
               name="promptInput"
               id="promptInput"
@@ -121,7 +121,7 @@ function Dashboard(props) {
             <input
               // value={durations.phase1duration}
               onChange={handleDurationChange}
-              value={durations.phase1duration ? durations.phase1duration : null}
+              value={durations.phase1duration ? durations.phase1duration : undefined}
               type="number"
               name="phase1duration"
               id="phase1duration"
@@ -130,7 +130,7 @@ function Dashboard(props) {
             <input
               // value={durations.phase2duration}
               onChange={handleDurationChange}
-              value={durations.phase2duration ? durations.phase2duration : null}
+              value={durations.phase2duration ? durations.phase2duration : undefined}
               type="number"
               name="phase2duration"
               id="phase2duration"
@@ -139,7 +139,7 @@ function Dashboard(props) {
             <input
               // value={durations.phase3duration}
               onChange={handleDurationChange}
-              value={durations.phase3duration ? durations.phase3duration : null}
+              value={durations.phase3duration ? durations.phase3duration : undefined}
               type="number"
               name="phase3duration"
               id="phase3duration"
