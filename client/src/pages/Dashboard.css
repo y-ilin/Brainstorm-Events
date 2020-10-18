@@ -34,6 +34,11 @@
   margin: 2vw;
   padding: 5vh 5vh 10vh 5vh;
 }
+#countdownFormDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 #promptForm {
   background-color: rgba(255, 255, 255, 0.2);
@@ -48,7 +53,7 @@
   text-align: left;
 }
 
-#countdownForm > input {
+#countdownFormDiv > input {
   border-radius: 50px;
   border: none;
   background-color: rgba(255, 255, 255, 0.7);
@@ -56,7 +61,13 @@
   margin: 1vw 1vw;
 }
 
-#promptForm > input {
+#promptFormDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#promptFormDiv > input {
   border-radius: 50px;
   border: none;
   background-color: rgba(255, 255, 255, 0.7);
@@ -81,4 +92,16 @@
   padding: 2vw 4vw;
   height: fit-content;
   text-decoration: none;
+}
+
+#promptFormDiv > i,
+#countdownFormDiv > i {
+  font-size: 2.4em;
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#promptFormDiv > i.done,
+#countdownFormDiv > i.done {
+  color: rgb(113, 247, 60);
 }

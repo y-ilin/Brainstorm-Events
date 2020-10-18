@@ -40,3 +40,11 @@ button:active {
 a:visited {
   color: black;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
