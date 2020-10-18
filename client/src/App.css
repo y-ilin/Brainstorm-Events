@@ -31,3 +31,8 @@
 input:focus {
   outline: none;
 }
+
+button:active {
+  border: none;
+  text-decoration: none;
+}

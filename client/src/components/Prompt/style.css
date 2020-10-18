@@ -1,0 +1,18 @@
+#promptDiv {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+#promptDiv > p {
+  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  min-width: 30%;
+  padding: 10px 50px 20px 50px;
+  margin: 0 10px;
+  border-radius: 0 0 50px 50px;
+  border: 1px solid rgb(54, 54, 54);
+  border-top: none;
+}

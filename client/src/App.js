@@ -36,6 +36,9 @@ function App() {
     lastName: ""
   })
 
+  // Track prompt
+  const [prompt, setPrompt] = useState("");
+
   useEffect(() => {
     axios.get("/api/user_data")
     .then(result => {
@@ -51,55 +54,64 @@ function App() {
     })
   }, [loggedIn]);
 
+  // On page load
+  useEffect(() => {
+    socket.on("incoming-prompt", data => {
+      console.log("incomign prompt on app:, " , data)
+      setPrompt(data)
+    })
+  }, []);
 
   return (
     <BrowserRouter>
       <div>
-        <SocketContext.Provider value={socket}>
-          <UserContext.Provider value={userData}>
-            {/* <Nav /> */}
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/login" />
-              </Route>
-              <Route exact path="/login">
-                {loggedIn ?
-                  <Redirect to="/dashboard" />
-                  :
-                  <Login setLoggedIn={setLoggedIn}/>
-                }
-              </Route>
-              <Route exact path="/signup">
-                  <Signup setLoggedIn={setLoggedIn}/>
-              </Route>
-              <Route path="/dashboard">
-                {loggedIn ? 
-                  <Dashboard />
-                  :  
-                  <Redirect to="/login"></Redirect> 
-                }
-              </Route>
-              <Route path="/whiteboard">
-                {loggedIn ? 
-                  <Whiteboard />
-                  :  
-                  <Redirect to="/login"></Redirect> 
-                }
-              </Route>
-              <Route path="*">
-                <NoMatch />
-              </Route>
+        {/* <PromptContext.Provider value={""}> */}
+            <SocketContext.Provider value={socket}>
+              <UserContext.Provider value={userData}>
+                {/* <Nav /> */}
+                <Switch>
+                  <Route exact path="/">
+                    <Redirect to="/login" />
+                  </Route>
+                  <Route exact path="/login">
+                    {loggedIn ?
+                      <Redirect to="/dashboard" />
+                      :
+                      <Login setLoggedIn={setLoggedIn}/>
+                    }
+                  </Route>
+                  <Route exact path="/signup">
+                      <Signup setLoggedIn={setLoggedIn}/>
+                  </Route>
+                  <Route path="/dashboard">
+                    {loggedIn ? 
+                      <Dashboard prompt={prompt} setPrompt={setPrompt}/>
+                      :  
+                      <Redirect to="/login"></Redirect> 
+                    }
+                  </Route>
+                  <Route path="/whiteboard">
+                    {loggedIn ? 
+                      <Whiteboard prompt={prompt} setPrompt={setPrompt}/>
+                      :  
+                      <Redirect to="/login"></Redirect> 
+                    }
+                  </Route>
+                  <Route path="*">
+                    <NoMatch />
+                  </Route>
 
-              <Route exact path="/logout">
-                {loggedIn ?
-                  <Logout setLoggedIn={setLoggedIn}/> 
-                  :
-                  <Redirect to="/login" />
-                }
-              </Route>
-            </Switch>
-          </UserContext.Provider>
-        </SocketContext.Provider>
+                  <Route exact path="/logout">
+                    {loggedIn ?
+                      <Logout setLoggedIn={setLoggedIn}/> 
+                      :
+                      <Redirect to="/login" />
+                    }
+                  </Route>
+                </Switch>
+              </UserContext.Provider>
+            </SocketContext.Provider>
+        {/* <PromptContext.Provider value={""}> */}
       </div>
     </BrowserRouter>
   );

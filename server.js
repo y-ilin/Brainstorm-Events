@@ -56,22 +56,58 @@ io.sockets.on("connection", socket => {
     let phase2duration=0;
     let phase3duration=0;
 
-    const serverTimer = (currentPhaseDuration) => {
-      setTimeout(() => {
+    // const serverTimer = (currentPhaseDuration) => {
+    //   const serverTimeout = setTimeout(() => {
+    //     console.log(`server: timer ${currentPhase} finished!`);
+    //     // Now continue to next phase, begin for loop again
+    //     currentPhase++;
+
+    //     if (currentPhase > 3) {
+    //       // Reset phase and phase durations
+    //       currentPhase=1;
+    //       // phase1duration=0;
+    //       // phase2duration=0;
+    //       // phase3duration=0;
+    //     } else {
+    //       // Tell all clients to show next phase intro
+    //       io.sockets.emit("give-phase-intro")
+    //     }
+
+    //   }, currentPhaseDuration*1000*60); // in minutes
+    // }
+    const serverTimeout = (currentPhaseDuration) => {
+      const serverTimer = setTimeout(() => {
+        // Clear any existing timer
+        clearTimeout(serverTimer)
+        console.log("clearing any previous timers")
+
         console.log(`server: timer ${currentPhase} finished!`);
         // Now continue to next phase, begin for loop again
         currentPhase++;
-        // Tell all clients to show next phase intro
-        io.sockets.emit("give-phase-intro")
+
+        // if (currentPhase > 3) {
+        //   // Reset phase and phase durations
+        //   currentPhase=1;
+        //   phase1duration=0;
+        //   phase2duration=0;
+        //   phase3duration=0;
+        // } else {
+          // Tell all clients to show next phase intro
+          io.sockets.emit("give-phase-intro")
+        // }
+
       }, currentPhaseDuration*1000*60); // in minutes
     }
 
     const beginNextPhase = (currentPhaseDuration) => {
-      console.log(`Beginning phase ${currentPhase} for ${currentPhaseDuration} seconds!`);
+      console.log(`Beginning phase ${currentPhase} for ${currentPhaseDuration*60} seconds!`);
       // Tell all clients to begin phase countdown
       io.sockets.emit("begin-phase", {currentPhase: currentPhase, duration: currentPhaseDuration*60}) // in ms * minutes
+
       // Begin phase countdown on server side
-      serverTimer(currentPhaseDuration);
+      serverTimeout(currentPhaseDuration);
+
+      // const serverExists = true;
     }
 
     socket.on("begin-next-phase", () => {
@@ -88,15 +124,6 @@ io.sockets.on("connection", socket => {
 
     socket.on("sendCountdownDurations", data => {
       console.log("data is: ", data);
-
-      // Client side: submit countdown durations
-      // Server side: redirect everyone to Phase 1 + start countdown setTimeout + send Phase 1 duration to all clients
-      // Client side: setInterval to display the ticking down of seconds
-      // Server side: when setTimeout finishes --> redirect everyone to Phase 2 + send Phase 2 duration to all clients
-      // Client side: setInterval to dispaly the ticking down of seconds
-      // Server side: when setTimeout finishes --> redirect everyone to Phase 3 + send Phase 3 duration to all clients
-      // Client side: setInterval to dispaly the ticking down of seconds
-      // Server side: when setTIemout finishes --> display "finish" + send snapshot to all clients
 
       // Store countdown duration data given by user
       phase1duration = data.phase1duration;
@@ -142,5 +169,16 @@ io.sockets.on("connection", socket => {
     // When one user removes a vote, broadcast to all other users
     socket.on("remove-vote", data => {
       socket.broadcast.emit("incoming-remove-vote", data)
+    })
+
+    // When a user moves to the whiteboard after the event, move all users
+    socket.on("client-finished-phases", () => {
+      io.sockets.emit("show-final-whiteboard")
+    })
+
+    // When a user submits a prompt
+    socket.on("submit-prompt", data => {
+      console.log(data)
+      io.sockets.emit("incoming-prompt", data)
     })
 })

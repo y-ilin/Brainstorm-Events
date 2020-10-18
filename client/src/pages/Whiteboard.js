@@ -6,11 +6,13 @@ import UserContext from "../utils/UserContext";
 // import Phase2 from "../components/Phase2";
 // import Phase3 from "../components/Phase3";
 import PhaseIntro from "../components/PhaseIntro";
+import Prompt from "../components/Prompt";
 import StickyContainer from "../components/StickyContainer";
 import Timer from "../components/Timer";
 import SocketContext from "../utils/SocketContext";
+import { PromiseProvider } from "mongoose";
 
-function Whiteboard() {
+function Whiteboard(props) {
   const userData = useContext(UserContext);
   const socket = useContext(SocketContext);
 
@@ -22,6 +24,8 @@ function Whiteboard() {
   const [showFirstIntro, setShowFirstIntro] = useState(true);
   // Track time left in each phase
   const [timeLeftState, setTimeLeftState] = useState(0);
+  // Prompt to show at top of screen
+  const [prompt, setPrompt] = useState("")
 
   // When client enters the Whiteboard, ask server to get client up to speed on
   // what phase the whole team is currently in
@@ -35,6 +39,10 @@ function Whiteboard() {
       console.log(userData);
       console.log(data);
     });
+
+    socket.on("set-prompt", data => {
+      setPrompt(data.prompt)
+    })
 
     socket.on("give-phase-intro", () => {
       // Show the intro
@@ -62,6 +70,12 @@ function Whiteboard() {
       }, 1000)
     })
 
+    socket.on("show-final-whiteboard", () => {
+      console.log("...ok...")
+      setCurrentPhase("finished");
+      setShowIntro(false);
+      console.log("ok")
+    })
   }, []);
 
   // const handleNextPhase = e => {
@@ -76,17 +90,24 @@ function Whiteboard() {
       <div className={"blotch blotch1"} currentPhase={currentPhase}></div>
       <div className={"blotch blotch2"} currentPhase={currentPhase}></div>
       <div className={"blotch blotch3"} currentPhase={currentPhase}></div>
-      <Timer
-        timeLeft={timeLeftState}
+      { currentPhase === "finished"
+        ? null
+        : <Timer
+          timeLeft={timeLeftState}
+          />
+      }
+      <Prompt
+        prompt={props.prompt}
       />
       <StickyContainer
         currentPhase={currentPhase}
       />
       { showIntro
       ? <PhaseIntro
-        showFirstIntro={showFirstIntro}
         currentPhase={currentPhase}
+        showFirstIntro={showFirstIntro}
         setShowFirstIntro={setShowFirstIntro}
+        showIntro={showIntro}
         />
       : null
       }

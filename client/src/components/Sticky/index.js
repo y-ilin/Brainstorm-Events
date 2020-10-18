@@ -127,7 +127,7 @@ export function Sticky(props) {
             className="sticky"
             onBlur={handleFinishTextChange}
           />
-          { props.currentPhase === 2
+          { props.currentPhase === 2 || props.currentPhase === "finished"
           ? <CommentButton
             stickyId={props.stickyId}
             allComments={allComments}
@@ -151,7 +151,7 @@ export function Sticky(props) {
           })
           : null
           }
-          { props.currentPhase === 3
+          { props.currentPhase === 3 || props.currentPhase === "finished"
           ? <VoteButton
             stickyId={props.stickyId}
             allVoters={allVoters}
@@ -160,7 +160,7 @@ export function Sticky(props) {
             />
           : null
           }
-          { props.currentPhase === 3
+          { props.currentPhase === 3 || props.currentPhase === "finished"
           ? <VoteCount
             allVoters={allVoters}
             />
