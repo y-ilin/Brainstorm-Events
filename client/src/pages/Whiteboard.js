@@ -48,6 +48,7 @@ function Whiteboard(props) {
       console.log("beginning phase with data: ", data)
       setCurrentPhase(data.currentPhase);
       setShowIntro(false);
+      setShowFirstIntro(false);
 
       // let timeLeft = data.duration;
 
@@ -66,10 +67,8 @@ function Whiteboard(props) {
     })
 
     socket.on("show-final-whiteboard", () => {
-      console.log("...ok...")
       setCurrentPhase("finished");
       setShowIntro(false);
-      console.log("ok")
     })
   }, []);
 
