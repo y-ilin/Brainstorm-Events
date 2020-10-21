@@ -13,7 +13,7 @@ export function PhaseIntro(props) {
   const handleNextPhase = e => {
     e.preventDefault();
     socket.emit("begin-next-phase");
-    props.setShowFirstIntro(false);
+    // props.setShowFirstIntro(false);
   }
 
   const handleFinishPhases = e => {

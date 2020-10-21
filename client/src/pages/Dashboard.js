@@ -3,10 +3,11 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import SocketContext from "../utils/SocketContext";
 import "./Dashboard.css";
 import "font-awesome/css/font-awesome.min.css";
+import API from "../utils/API";
 
 function Dashboard(props) {
+  // For directing all users to the whiteboard at the same time
   let history = useHistory();
-  // const userData = useContext(UserContext);
   const socket = useContext(SocketContext);
 
   // Prompt to show at top of screen
@@ -30,15 +31,27 @@ function Dashboard(props) {
   }, [props.prompt])
 
   useEffect(() => {
-    socket.on("incoming-durations", data => {
-      setDurations({
-        phase1duration: data.phase1duration,
-        phase2duration: data.phase2duration,
-        phase3duration: data.phase3duration,
+    // API.createEvent()
+    // When user lands on dashboard, fetch all data for this event    
+    API.getEventDetails()
+      .then(res => {
+        console.log(res.data)
       })
+
+    // When a user has changed the durations, prompt all other users to fetch that data from server
+    socket.on("incoming-durations", () => {
+      API.getEventDetails()
+        .then(res => {
+          setDurations({
+            phase1duration: res.data[0].duration1,
+            phase2duration: res.data[0].duration2,
+            phase3duration: res.data[0].duration3,
+          })
+        })
       setDurationsDone(true)
     })
 
+    // Move user to whiteboard because another user has started the event
     socket.on("moving-you-to-whiteboard", () => {
       history.push("/whiteboard")
     })
@@ -62,21 +75,33 @@ function Dashboard(props) {
 
   const handleTimerFormSubmit = e => {
     e.preventDefault();
-    console.log("time durations submitted: ", durations);
+
     if (durations.phase1duration !== 0 && durations.phase2duration !== 0 && durations.phase3duration !== 0) {
       setDurationsDone(true)
     } else {
       setDurationsDone(false)
     }
 
-    // Send phase durations to server
+    // Tell all other users to fetch new durations data
     socket.emit("sendCountdownDurations", durations);
+
+    // Save phase durations to database
+    API.setDurations(durations)
+      .then(data => {
+        console.log("finished setting durations in database", data)
+      })
   }
 
   const handlePromptSubmit = e => {
     e.preventDefault();
     props.setPrompt(prompt)
+
+    // Send to server to broadcast prompt to every other user
     socket.emit("submit-prompt", prompt)
+
+    // Save prompt to database
+    API.setPrompt({prompt})
+
     if (prompt !== "") {
       setPromptDone(true)
     } else {

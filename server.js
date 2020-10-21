@@ -32,6 +32,7 @@ app.use(passport.session());
 // Requiring our api routes
 require("./controllers/api-routes.js")(app);
 require("./controllers/sticky-api-routes.js")(app);
+require("./controllers/event-api-routes.js")(app);
 // If no api routes are hit, send the front end
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"))
@@ -123,8 +124,6 @@ io.sockets.on("connection", socket => {
     })
 
     socket.on("sendCountdownDurations", data => {
-      console.log("data is: ", data);
-
       // Store countdown duration data given by user
       phase1duration = data.phase1duration;
       phase2duration = data.phase2duration;

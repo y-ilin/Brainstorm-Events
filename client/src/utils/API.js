@@ -36,5 +36,17 @@ export default {
     },
     removeVote: query => {
         return axios.post("/api/removevote", query)
+    },
+    createEvent: query => {
+        return axios.post("/api/createevent", query)
+    },
+    getEventDetails: query => {
+        return axios.get("/api/eventdetails", query)
+    },
+    setDurations: query => {
+        return axios.post("/api/setdurations", query)
+    },
+    setPrompt: query => {
+        return axios.post("/api/setprompt", query)
     }
 }; 
