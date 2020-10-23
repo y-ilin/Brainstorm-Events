@@ -2,15 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import "./style.css";
 import SocketContext from "../../utils/SocketContext";
 
-export function Timer(props) {
+export function Timer() {
   const socket = useContext(SocketContext);
 
   // Track time left in each phase
   const [timeLeftState, setTimeLeftState] = useState(0);
 
-  const timeLeft = props.timeLeft;
-  const minutes = Math.floor(timeLeft/60);
-  const seconds = ("0" + timeLeft%60).slice(-2);
   
   useEffect(() => {
     socket.on("begin-phase", data => {
@@ -30,6 +27,9 @@ export function Timer(props) {
       }, 1000)
     })
   }, [])
+
+  const minutes = Math.floor(timeLeftState/60);
+  const seconds = ("0" + timeLeftState%60).slice(-2);
 
   return (
     <div id="timerDiv">
