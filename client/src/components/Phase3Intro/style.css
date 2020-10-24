@@ -1,14 +1,5 @@
 .phaseIntro.phase3 {
-  background-color: rgba(255, 186, 59, 0.8);
-  background-image: radial-gradient(
-    /* rgba(239, 230, 255, 0.8),
-    rgba(186, 167, 255, 0.8),
-    rgba(112, 60, 255, 0.863),
-    rgba(15, 19, 255, 0.8) */
-      rgba(239, 230, 255, 0.8),
-    rgba(186, 167, 255, 0.8),
-    rgba(177, 148, 255, 0.863),
-    rgba(124, 126, 255, 0.8)
-  );
-  box-shadow: 0px 0px 40px 10px rgba(124, 126, 255, 0.8);
+  background-color: rgba(70, 19, 255, 1);
+  box-shadow: 0px 0px 100px 200px rgba(70, 19, 255, 1);
+  color: white;
 }

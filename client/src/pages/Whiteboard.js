@@ -65,9 +65,12 @@ function Whiteboard(props) {
 
   return (
     <div className={"whiteboard phase"+currentPhase} currentPhase={currentPhase}>
-      <div className={"blotch blotch1"} currentPhase={currentPhase}></div>
-      <div className={"blotch blotch2"} currentPhase={currentPhase}></div>
-      <div className={"blotch blotch3"} currentPhase={currentPhase}></div>
+      {/* <div className="blotchDiv"> */}
+        <div className={"blotch blotch1"} currentPhase={currentPhase}></div>
+        <div className={"blotch blotch2"} currentPhase={currentPhase}></div>
+        <div className={"blotch blotch3"} currentPhase={currentPhase}></div>
+      {/* </div> */}
+
       <Timer />
       <Prompt
         prompt={props.prompt}

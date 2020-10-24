@@ -10,6 +10,7 @@
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.7);
   width: fit-content;
+  border: 1px solid black;
 }
 
 #newStickyForm > input {
@@ -24,8 +25,8 @@
 #newStickyForm > button {
   border-radius: 50px;
   border: none;
-  background-color: rgba(255, 227, 100, 0.925);
-  box-shadow: 0 0 10px 5px rgba(255, 242, 121, 0.8);
+  background-color: rgb(255, 242, 62);
+  border: 1px solid white;
   padding: 1vw 2vw;
   margin: 1vw 1vw;
 }

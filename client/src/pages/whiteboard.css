@@ -6,161 +6,196 @@
   left: 0;
 }
 
-.whiteboard.phase1 {
-  background-color: rgb(255, 255, 241);
-  /* background-image: linear-gradient(
-    -45deg,
-    rgb(255, 191, 107),
-    rgb(255, 245, 108)
-  ); */
+/* .blotchDiv {
+  position: fixed;
+  bottom: 230px;
+  left: -30px;
+  height: 300px;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+.blotch {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50px;
+  margin: 10px;
+  filter: blur(8px);
+  border: 2px solid black;
+}
+.blotch1 {
+  background-color: rgb(250, 231, 57);
+  background-image: linear-gradient(rgb(255, 245, 108), rgb(255, 182, 87));
+}
+.blotch2 {
+  background-color: rgb(255, 87, 123);
+  background-image: linear-gradient(rgb(255, 150, 108), rgb(255, 87, 123));
+}
+.blotch3 {
+  background-color: rgb(250, 231, 57);
+  background-image: linear-gradient(rgb(170, 87, 255), rgb(108, 111, 255));
+}
+
+.whiteboard.phase1 > .blotchDiv > .blotch1 {
+  opacity: 100%;
+}
+.whiteboard.phase1 > .blotchDiv > .blotch2 {
+  opacity: 30%;
+}
+.whiteboard.phase1 > .blotchDiv > .blotch3 {
+  opacity: 30%;
+}
+
+.whiteboard.phase2 > .blotchDiv > .blotch1 {
+  opacity: 30%;
+}
+.whiteboard.phase2 > .blotchDiv > .blotch2 {
+  opacity: 100%;
+}
+.whiteboard.phase2 > .blotchDiv > .blotch3 {
+  opacity: 30%;
+}
+
+.whiteboard.phase3 > .blotchDiv > .blotch1 {
+  opacity: 30%;
+}
+.whiteboard.phase3 > .blotchDiv > .blotch2 {
+  opacity: 30%;
+}
+.whiteboard.phase3 > .blotchDiv > .blotch3 {
+  opacity: 100%;
+} */
+
+/* 
+.whiteboard.phase1 {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 153, 0, 0.2) 10px,
+    rgba(255, 252, 55, 0.2) 20px
+  );
+  background-color: rgb(255, 255, 255);
+}
+.whiteboard.phase2 {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 30, 0, 0.2) 10px,
+    rgba(255, 55, 115, 0.1) 20px
+  );
+}
+.whiteboard.phase3 {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 17, 255, 0.2) 10px,
+    rgba(98, 55, 255, 0.2) 20px
+  );
+}
+.whiteboard.phasefinished {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 17, 255, 0.2) 10px,
+    rgba(98, 55, 255, 0.2) 20px
+  );
+  background-color: rgb(219, 219, 219);
+}
+*/
+
 .whiteboard.phase1 > .blotch1 {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  width: 20vw;
-  height: 20vw;
+  top: -30vh;
+  right: 15vw;
+  width: 40vw;
+  height: 40vw;
   border-radius: 20vw;
-  background-color: rgba(255, 243, 71, 0.6);
-  box-shadow: 0 0 10vw 40vw rgba(255, 243, 71, 0.6);
+  background-color: rgba(255, 175, 4, 0.65);
+  filter: blur(5vw);
 }
 .whiteboard.phase1 > .blotch2 {
   position: fixed;
-  top: 25vh;
-  left: 0px;
-  width: 20vw;
-  height: 20vw;
+  top: -30vh;
+  left: 15vw;
+  width: 40vw;
+  height: 40vw;
   border-radius: 20vw;
-  background-color: rgba(255, 185, 34, 0.6);
-  box-shadow: 0 0 10vw 30vw rgba(255, 185, 34, 0.6);
-}
-.whiteboard.phase1 > .blotch3 {
-  position: fixed;
-  bottom: -15vw;
-  left: 50vw;
-  width: 20vw;
-  height: 20vw;
-  border-radius: 20vw;
-  background-color: rgba(255, 255, 137, 0.3);
-  box-shadow: 0 0 10vw 30vw rgba(255, 255, 137, 0.3);
+  background-color: rgba(255, 215, 40, 0.65);
+  filter: blur(5vw);
 }
 
-.whiteboard.phase2 {
-  background-color: rgb(255, 235, 230);
-  /* background-image: linear-gradient(
-    -45deg,
-    rgb(255, 146, 201),
-    rgb(255, 124, 124),
-    rgb(255, 100, 73)
-  ); */
-}
 .whiteboard.phase2 > .blotch1 {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  width: 20vw;
-  height: 20vw;
+  top: -30vh;
+  right: 15vw;
+  width: 40vw;
+  height: 40vw;
   border-radius: 20vw;
-  background-color: rgba(255, 39, 39, 0.6);
-  box-shadow: 0 0 10vw 40vw rgba(255, 39, 39, 0.6);
+  background-color: rgba(255, 64, 39, 0.65);
+  filter: blur(5vw);
 }
 .whiteboard.phase2 > .blotch2 {
   position: fixed;
-  top: 25vh;
-  left: 0px;
-  width: 20vw;
-  height: 20vw;
+  top: -30vh;
+  left: 15vw;
+  width: 40vw;
+  height: 40vw;
   border-radius: 20vw;
-  background-color: rgba(255, 34, 82, 0.4);
-  box-shadow: 0 0 10vw 30vw rgba(255, 34, 82, 0.4);
-}
-.whiteboard.phase2 > .blotch3 {
-  position: fixed;
-  bottom: -15vw;
-  left: 40vw;
-  width: 20vw;
-  height: 20vw;
-  border-radius: 20vw;
-  background-color: rgba(255, 127, 41, 0.4);
-  box-shadow: 0 0 20vw 30vw rgba(255, 127, 41, 0.4);
+  background-color: rgba(255, 34, 82, 0.45);
+  filter: blur(5vw);
 }
 
-.whiteboard.phase3 {
-  background-color: rgb(205, 183, 255);
-  background-image: linear-gradient(
-    -45deg,
-    rgb(193, 100, 255),
-    rgb(75, 72, 255)
-  );
-}
 .whiteboard.phase3 > .blotch1 {
   position: fixed;
-  top: -10vw;
-  right: -10vw;
-  width: 5vw;
-  height: 5vw;
+  top: -30vh;
+  right: 15vw;
+  width: 40vw;
+  height: 40vw;
   border-radius: 20vw;
-  background-color: rgba(12, 28, 247, 0.2);
-  box-shadow: 0 0 30vw 10vw rgba(12, 28, 247, 0.2);
+  background-color: rgba(12, 28, 247, 0.6);
+  filter: blur(5vw);
 }
 .whiteboard.phase3 > .blotch2 {
   position: fixed;
-  top: 40vh;
-  left: -15vw;
-  width: 5vw;
-  height: 5vw;
+  top: -30vh;
+  left: 15vw;
+  width: 40vw;
+  height: 40vw;
   border-radius: 20vw;
-  background-color: rgba(220, 176, 255, 0.3);
-  box-shadow: 0 0 30vw 20vw rgba(220, 176, 255, 0.3);
-}
-.whiteboard.phase3 > .blotch3 {
-  position: fixed;
-  bottom: -25vw;
-  left: 60vw;
-  width: 20vw;
-  height: 20vw;
-  border-radius: 20vw;
-  background-color: rgba(14, 30, 255, 0.1);
-  box-shadow: 0 0 20vw 15vw rgba(14, 30, 255, 0.1);
+  background-color: rgba(108, 45, 255, 0.6);
+  filter: blur(5vw);
 }
 
 .whiteboard.phasefinished {
-  background-color: rgb(205, 183, 255);
-  /* background-image: linear-gradient(
-    -45deg,
-    rgb(144, 12, 206),
-    rgb(75, 72, 255)
-  ); */
+  background-color: rgba(21, 37, 255, 0.1);
 }
 .whiteboard.phasefinished > .blotch1 {
   position: fixed;
-  top: -10vw;
+  top: -20vw;
   right: 0vw;
-  width: 5vw;
-  height: 5vw;
+  width: 50vw;
+  height: 50vw;
   border-radius: 20vw;
-  background-color: rgba(113, 0, 218, 0.4);
-  box-shadow: 0 0 30vw 50vw rgba(113, 0, 218, 0.4);
+  background-color: rgba(255, 38, 85, 0.5);
+  filter: blur(5vw);
 }
 .whiteboard.phasefinished > .blotch2 {
   position: fixed;
-  top: 40vh;
-  left: 0vw;
-  width: 5vw;
-  height: 5vw;
+  top: 5vh;
+  left: -10vw;
+  width: 50vw;
+  height: 50vw;
   border-radius: 20vw;
-  background-color: rgba(75, 72, 255, 0.5);
-  box-shadow: 0 0 30vw 60vw rgba(75, 72, 255, 0.5);
+  background-color: rgba(64, 30, 255, 0.5);
+  filter: blur(5vw);
 }
 .whiteboard.phasefinished > .blotch3 {
   position: fixed;
-  bottom: -10vw;
-  left: 50vw;
-  width: 20vw;
-  height: 20vw;
+  bottom: -20vw;
+  right: 5vw;
+  width: 65vw;
+  height: 60vw;
   border-radius: 20vw;
-  background-color: rgba(75, 72, 255, 0.3);
-  box-shadow: 0 0 20vw 30vw rgba(75, 72, 255, 0.3);
+  background-color: rgba(21, 37, 255, 0.6);
+  filter: blur(5vw);
 }
 
 div:focus {

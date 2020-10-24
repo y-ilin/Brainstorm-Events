@@ -84,7 +84,7 @@ export function NewStickyForm(props) {
           id="newStickyText"
           placeholder="Your idea!"
         />
-        <button onClick={handleCreateSticky}>Post!</button>
+        <button onClick={handleCreateSticky}>Post</button>
       </form>
     </div>
   );
