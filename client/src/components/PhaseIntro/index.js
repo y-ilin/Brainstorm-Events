@@ -41,13 +41,13 @@ export function PhaseIntro(props) {
           onClick={handleNextPhase}
           className="nextPhaseButton"
           >
-          Begin Phase
+          BEGIN PHASE →
           </button>
         : <button
           onClick={handleFinishPhases}
           className="nextPhaseButton"
           >
-          Go to whiteboard
+          GO TO WHITEBOARD
           </button>
       }
     </div>

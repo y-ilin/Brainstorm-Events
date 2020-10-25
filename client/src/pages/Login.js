@@ -57,7 +57,7 @@ function Login() {
     <div className="loginSignupBackground">
       <div className="loginSignupContainer">
         <div className="loginSignupGroup">
-          <h2>Login</h2>
+          <h2>LOGIN</h2>
           <form className="login">
             <div className="form-group">
               <input

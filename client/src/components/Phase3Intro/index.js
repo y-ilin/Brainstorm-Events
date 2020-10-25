@@ -6,7 +6,7 @@ export function Phase3Intro() {
     <div className={"phaseIntro phase3"}>
       <div className="introGroup introGroup1">
         <p>Welcome to Phase 3:</p>
-        <p>Voting</p>
+        <p className="phaseTitle">VOTING</p>
       </div>
       <div className="introGroup introGroup2">
         <p>Which ideas should we explore?</p>

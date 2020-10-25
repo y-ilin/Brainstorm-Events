@@ -4,6 +4,9 @@ import SocketContext from "../utils/SocketContext";
 import "./Dashboard.css";
 import "font-awesome/css/font-awesome.min.css";
 import API from "../utils/API";
+import brainstormIcon from "../utils/icons/brainstormIcon.svg";
+import buildIcon from "../utils/icons/buildIcon.svg";
+import voteIcon from "../utils/icons/voteIcon.svg";
 
 function Dashboard(props) {
   // For directing all users to the whiteboard at the same time
@@ -115,24 +118,26 @@ function Dashboard(props) {
 
   return (
     <div className="dashboardBackground">
+      <div className="dashboardTitleDiv">
+        <h1 className="dashboardTitle">Welcome to the waiting room</h1>
+      </div>
       <div className="dashboardDiv">
-        <h1>Welcome to the waiting room</h1>
-        <form id="promptForm">
-          <p>Brainstorm prompt:</p>
-          <div id="promptFormDiv">
+        <form className="formDiv">
+          <p className="formDivTitle">Brainstorm prompt:</p>
+          <div id="promptForm">
             <input
               onChange={handlePromptChange}
               value={props.prompt ? props.prompt : undefined}
               type="text"
               name="promptInput"
               id="promptInput"
-              placeholder="Orient the team, what are we creating ideas for?"
+              placeholder="Orient the team, what are we brainstorming ideas for?"
             />
             <input
               onClick={handlePromptSubmit}
               type="submit"
               value="Submit"
-              id="submitPromptBtn"
+              className="formSubmitBtn"
             />
             { promptDone
               ? <i className="fa fa-check-circle done"></i>
@@ -140,46 +145,62 @@ function Dashboard(props) {
             }
           </div>
         </form>
-        <form id="countdownForm">
-          <p>How long should each phase go for?</p>
-          <div id="countdownFormDiv">
-            <input
-              // value={durations.phase1duration}
-              onChange={handleDurationChange}
-              value={durations.phase1duration ? durations.phase1duration : undefined}
-              type="number"
-              name="phase1duration"
-              id="phase1duration"
-              placeholder="Phase 1 (minutes)"
-            />
-            <input
-              // value={durations.phase2duration}
-              onChange={handleDurationChange}
-              value={durations.phase2duration ? durations.phase2duration : undefined}
-              type="number"
-              name="phase2duration"
-              id="phase2duration"
-              placeholder="Phase 2 (minutes)"
-            />
-            <input
-              // value={durations.phase3duration}
-              onChange={handleDurationChange}
-              value={durations.phase3duration ? durations.phase3duration : undefined}
-              type="number"
-              name="phase3duration"
-              id="phase3duration"
-              placeholder="Phase 3 (minutes)"
-            />
-            <input
-              onClick={handleTimerFormSubmit}
-              type="submit"
-              value="Set phase durations!"
-              id="startCountdownBtn"
-            ></input>
-            { durationsDone
-              ? <i className="fa fa-check-circle done"></i>
-              : <i className="fa fa-check-circle"></i>
-            }
+        <form className="formDiv">
+          <p className="formDivTitle">How long should each phase go for?</p>
+          <div id="countdownForm">
+            <div className="phaseDiv">
+              <img src={brainstormIcon} alt="sticky note icon" className="phaseIcon"/>
+              <p>BRAINSTORM</p>
+              <input
+                // value={durations.phase1duration}
+                onChange={handleDurationChange}
+                value={durations.phase1duration ? durations.phase1duration : undefined}
+                type="number"
+                name="phase1duration"
+                id="phase1duration"
+                placeholder="Phase 1 (minutes)"
+              />
+            </div>
+            <div className="phaseDiv">
+              <img src={buildIcon} alt="add sticky note icon" className="phaseIcon"/>
+              <p>BUILD</p>
+              <input
+                // value={durations.phase2duration}
+                onChange={handleDurationChange}
+                value={durations.phase2duration ? durations.phase2duration : undefined}
+                type="number"
+                name="phase2duration"
+                id="phase2duration"
+                placeholder="Phase 2 (minutes)"
+              />
+            </div>
+            <div className="phaseDiv">
+              <img src={voteIcon} alt="vote icon" className="phaseIcon"/>
+              <p>VOTE</p>
+              <input
+                // value={durations.phase3duration}
+                onChange={handleDurationChange}
+                value={durations.phase3duration ? durations.phase3duration : undefined}
+                type="number"
+                name="phase3duration"
+                id="phase3duration"
+                placeholder="Phase 3 (minutes)"
+              />
+            </div>
+            <div className="phaseDiv">
+              <div className="submitDiv">
+                <input
+                  onClick={handleTimerFormSubmit}
+                  type="submit"
+                  value="Set phase durations"
+                  className="formSubmitBtn"
+                ></input>
+                { durationsDone
+                  ? <i className="fa fa-check-circle done"></i>
+                  : <i className="fa fa-check-circle"></i>
+                }
+              </div>
+            </div>
           </div>
         </form>
         <div id="whiteboardButtonDiv">
@@ -188,7 +209,7 @@ function Dashboard(props) {
             id="whiteboardButton"
             onClick={handleGoToWhiteboard}
           >
-            Go to whiteboard!
+            START EVENT →
           </Link>
           {/* { promptDone && durationsDone
             ? <Link

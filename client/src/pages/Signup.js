@@ -59,7 +59,7 @@ function Signup() {
       <div className="loginSignupBackground">
         <div className="loginSignupContainer">
           <div className="loginSignupGroup">
-            <h2>Sign Up</h2>
+            <h2>SIGN UP</h2>
             <form className="signup">
             <div className="form-group">
                 <input
