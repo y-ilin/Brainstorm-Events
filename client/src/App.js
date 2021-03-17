@@ -13,6 +13,8 @@ import Whiteboard from "./pages/Whiteboard";
 import Logout from "./pages/Logout";
 import NoMatch from "./pages/NoMatch";
 import axios from "axios";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+
 
 function App() {
   // Connect user to socket
@@ -62,7 +64,13 @@ function App() {
     })
   }, []);
 
+  const client = new ApolloClient({
+    uri: 'http://localhost:4000',
+    cache: new InMemoryCache()
+  });
+
   return (
+    <ApolloProvider client={client}>
     <BrowserRouter>
       <div>
         {/* <PromptContext.Provider value={""}> */}
@@ -115,6 +123,7 @@ function App() {
         {/* <PromptContext.Provider value={""}> */}
       </div>
     </BrowserRouter>
+    </ApolloProvider>
   );
 }
 

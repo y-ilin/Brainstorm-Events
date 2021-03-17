@@ -38,6 +38,54 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"))
 })
 
+///////////////////////////////////////
+// Implementing GraphQL
+const Sticky = require("./models/sticky");
+const { ApolloServer } = require('apollo-server');
+
+const Query = require('./controllers/Query')
+
+const typeDefs = `
+  type Query {
+    loadStickies: [Sticky]
+  }
+
+  type Sticky {
+    comments: [Comment]
+    stickyId: String
+    stickyText: String
+    voters: [String]
+    x: Float
+    y: Float
+  }
+
+  type Comment {
+    commentId: String
+    commentText: String
+    stickyId: String
+  }
+`
+const resolvers = {
+  // Query: {
+  //   loadStickies: () => {
+  //       return Sticky.find().populate("comments")
+  //   }
+  // }
+  Query,
+}
+
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers
+})
+
+apolloServer
+  .listen()
+  .then(({ url }) =>
+    console.log(`Server is running on ${url}`)
+  );
+///////////////////////////////////////
+
 server.listen(app.get("port"), () => {
     console.log(
       `==> 🌎  Server listening on port ${app.get("port")}. Visit http://localhost:${app.get("port")}/ in your browser.`,
